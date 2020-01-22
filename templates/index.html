@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html lang = "en">
+  <head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <title>catch+release</title>
+    <meta charset = "UTF-8" />
+
+<!------------------------------------------------------------------------------>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<!-- <script type="text/javascript" src="/js/javascript.js"></script> --->
+
+<script>
+  $(document).ready(function()
+  {
+    setTimeout(function() {$('#info').fadeOut('fast');}, 1000);
+  });
+</script>
+<!----------------------------------------------------------------------------->
+
+</head>
+
+<body>
+
+  <center>
+  <h1> Catch & Release </h1>
+  <br><br>
+  <h2>
+  <style> a:link{background-color: #FFFFFF; color: white;  padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; } </style>
+
+  <a href="{{ url_for('inputview') }}">select field video and capture text</a>
+  <br>
+  <a href="{{ url_for('labelimagesview') }}">label images from field video</a>
+  <br>
+  <a href="{{ url_for('infoview') }}">project information</a>
+
+  </h2>
+  </center>
+<!----------------------------------------------------------------------------->
+
+  <br><br>
+  <div id="info" style="text-align:center; width:100%">
+      <FONT color="green">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          {% for message in messages %}
+          <i> {{ message }} </i>
+          {% endfor %}
+        {% endif %}
+        {% endwith %}
+      </font>
+  </div>
+<!----------------------------------------------------------------------------->
+
+</body>
+</html>

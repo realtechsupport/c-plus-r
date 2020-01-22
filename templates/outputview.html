@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html lang = "en">
+  <head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <title>catch&release.html</title>
+    <meta charset = "UTF-8" />
+  </head>
+  <body>
+<!----------------------------------------------------------------------------->
+    <h1>text from field recordings</h1>
+      <video controls id="thisvideo" poster="/static/Untitled.png" video width="640" height="480">
+        <source src={{ url_for('static', filename=showvideo) }} type="video/webm">
+      </video>
+      <br><br>
+<!----------------------------------------------------------------------------->
+<form method="POST" enctype="multipart/form-data">
+
+  <fieldset>
+    <legend>text from field recording at and above the confidence level</legend>
+      <p>
+        <div class='form-text'
+          <textarea rows="10" cols="125" placeholder = "Here the output of the analysis">
+           {{result}}
+         </textarea>
+       </div>
+      </p>
+  </fieldset>
+
+  <fieldset>
+    <legend>text from field recording at and above the confidence level, filtered by the search term</legend>
+      <p>
+        <div class='form-text'
+          <textarea rows="10" cols="125" placeholder = "Here the output of the search">
+           {{sresult}}
+         </textarea>
+       </div>
+      </p>
+  </fieldset>
+<!----------------------------------------------------------------------------->
+<br>
+<style> input  {width:200px; height: 25px;} </style>
+<h2><input type=submit name="download" value="download results"></h2>
+
+</form>
+
+<!----------------------------------------------------------------------------->
+<br>
+<center>
+<a href="{{ url_for('index') }}">back to start - delete data</a>
+</center>
+<!----------------------------------------------------------------------------->
+</body>
+</html>

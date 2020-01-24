@@ -1,0 +1,55 @@
+<!DOCTYPE HTML>
+<html lang = "en">
+  <head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <title>catch+release</title>
+    <meta charset = "UTF-8" />
+  <!------------------------------------------------------------------------->
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+    <script>
+      $(document).ready(function()
+      {
+        setTimeout(function() {$('#info').fadeOut('fast');}, 3000);
+      });
+    </script>
+  <!------------------------------------------------------------------------->
+  </head>
+  <body>
+<!----------------------------------------------------------------------------->
+    <h1>video view and text extraction</h1>
+      <video controls id="thisvideo" poster="/static/Untitled.png" video width="640" height="480">
+        <source src={{ url_for('static', filename=showvideo) }} type="video/webm">
+      </video>
+<!----------------------------------------------------------------------------->
+
+<style> input  {width:200px; height: 25px;} </style>
+
+<center>
+<form method="POST" enctype="multipart/form-data">
+<table>
+<br><br>
+  {% for field in form if field.widget.input_type != 'hidden' %}
+    <tr>
+      <td>{{ field }}</td>
+      <td>{{ field.label }}</td>
+    </tr>
+  {% endfor %}
+</table>
+
+  <h3>
+  caveat: <br>
+  .mp4 conversion to .webm and capture-text take time...
+  <br><br>
+  <input type=submit name='view' value='view-video'>
+  &nbsp&nbsp&nbsp
+  <input type=submit name='capture' value='capture-text'>
+  &nbsp&nbsp&nbsp
+  <style> a:link{background-color: #DCDCDC; padding-bottom: 6px; padding-top: 6px; padding-right: 10px; padding-left: 10px; text-align: center; text-decoration: none; display: inline-block; } </style>
+  <a href="{{ url_for('index') }}"> release </a>
+  </h3>
+
+</center>
+</form>
+</body>
+</html>

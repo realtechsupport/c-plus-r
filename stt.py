@@ -15,8 +15,7 @@ def extract_text(app, videofile, language, startsecs, duration, chunk, tconfiden
     now = strftime("%Y-%m-%d_%H:%M", gmtime())
 
     videoname = videofile.split('/')[-1] + '_'
-    #textlog = app.config['ROOT'] +'s2tlog_' + videoname + now +'.txt'
-    textlog = 's2tlog_' + videoname + now +'.txt'
+    textlog = app.config['TMP'] +'s2tlog_' + videoname + now +'.txt'
 
     encoding = 'wav'
     path_audioinput = extract_audio_from_video(videofile, encoding)
@@ -27,7 +26,7 @@ def extract_text(app, videofile, language, startsecs, duration, chunk, tconfiden
     os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = googcreds
 
     #create the slices
-    destination = app.config['ROOT'] + '/'
+    destination = app.config['TMP']
 
     starts=[]
     starts = make_slices_from_audio(cpath, videofile, audioinput, startsecs, duration, chunk, destination, onechan=True)

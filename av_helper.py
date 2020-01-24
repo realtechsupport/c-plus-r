@@ -112,7 +112,7 @@ def make_slices_from_audio(datapath, videofile, audioinput, startsecs, duration,
     for segment in starts:
         print('Slicing the original audio into chunks ...')
         command = 'ffmpeg -loglevel quiet -y -i ' + audioinput + ' -ss ' + str(segment) + ' -t ' + str(chunk) + ' -acodec copy ' + name + '_' + str(i) + '.wav'
-        print(command)
+        #print(command)
         subprocess.call(command, shell=True)
         if(onechan == True):
             command = "ffmpeg -loglevel quiet -y -i " + name + '_' + str(i) + '.wav'  + " -loglevel quiet -y -ab 160k -ac 1 -ar 16000 -vn " + name + '_1ch_16k_' + str(i) +'.wav'
@@ -144,21 +144,18 @@ def get_audio_info(audiofile):
         duration = frames / float(rate)
     return( rate, frames, duration)
 #-------------------------------------------------------------------------------
-
 def convert_mp4_to_webm(video_mp4):
     videoname = video_mp4.split('.mp4')[0]
     video_webm = videoname + '.webm'
     command = 'ffmpeg -y -i  ' + video_mp4 +  ' -f webm -c:v libvpx -b:v 1M -acodec libvorbis ' + video_webm + ' -hide_banner'
     subprocess.call(command, shell=True)
 
-#-------------------------------------------------------------------------------
-
+#--------------------------------------------------------------------------------
 def convert_mp4_to_webm_small (video_mp4):
     #reduces filesize; 640 wide output, some loss of quality
     videoname = video_mp4.split('.mp4')[0]
     video_webm = videoname + '.webm'
     command = 'ffmpeg -y -i ' + video_mp4 + ' -c:v libvpx-vp9 -b:v 0.33M -c:a libopus -b:a 96k -filter:v scale=640:-1 ' + video_webm + ' -hide_banner'
-
     subprocess.call(command, shell=True)
 
 #-------------------------------------------------------------------------------

@@ -18,13 +18,16 @@ from utilities import *
 
 #make directories tmp, audiosegments, results ---------------------------------
 cwd = os.getcwd()
+t_dir = cwd + '/tmp/'
 s_dir = cwd + '/static/'
 
+if not os.path.exists(t_dir):
+    os.makedirs(t_dir)
 #-------------------------------------------------------------------------------
 app = Flask(__name__, template_folder="templates")
 
 app.config['SECRET_KEY'] = 'you-will-never-guess'
-app.config['ROOT'] = cwd
+app.config['TMP'] = t_dir
 app.config['STATIC'] = s_dir
 
 class Config(object):
@@ -36,7 +39,7 @@ class Config(object):
 def index():
 
     formats = ('*.webm', '*.wav', '*.mp4', '*.MP4', '*.txt', '*.zip')
-    locations = ('STATIC', 'ROOT')
+    locations = ('STATIC', 'TMP')
     removefiles(app, formats, locations)
     flash("...deleting data files....", category='notice')
 
@@ -126,14 +129,16 @@ def inputview():
                     filename = filename.split('.')[0] +  '.webm'
                     #print('conversion from .mp4 to .webm finished.....')
 
-            destination = os.path.join(app.config['ROOT'], filename)
+            destination = os.path.join(app.config['TMP'], filename)
             shutil.copyfile(revsource, destination)
 
             session['s_filename'] = filename
 
-            #get the other inputs ....start and end times
-            s_h = form.s_h.data; s_m = form.s_m.data; s_s = form.s_s.data
-            e_h = form.e_h.data; e_m = form.e_m.data; e_s = form.e_s.data
+            #get the other inputs ....start and end times minutes / seconds only
+            s_h = 0
+            s_m = form.s_m.data; s_s = form.s_s.data
+            e_h = 0
+            e_m = form.e_m.data; e_s = form.e_s.data
 
             start_time = s_s + 60*s_m + 3600*s_h
             end_time = e_s + 60*e_m + 3600*e_h
@@ -145,7 +150,7 @@ def inputview():
             else:
                 searchterm = form.search.data
 
-            os.chdir(app.config['ROOT'])
+            os.chdir(app.config['TMP'])
             maxattempts = 5
             results, searchresults = extract_text(app, destination, form.lang.data, start_time, duration, form.chunk.data, form.conf.data, maxattempts, searchterm)
             #session variables limited to 4kb !!
@@ -168,7 +173,6 @@ def inputview():
 def outputview():
     form = Downloads()
     template = 'outputview.html'
-    log = ''
 
     s_results = session.get('s_results', None)
     s_searchresults = session.get('s_searchresults', None)
@@ -178,15 +182,12 @@ def outputview():
         print('inside the download option..')
         template = 'index.html'
         if("download" in request.form):
-            #resultspath = os.path.join(current_app.root_path, app.config['ROOT'])
-            resultspath = app.config['ROOT'] + '/'
+            resultspath = os.path.join(current_app.root_path, app.config['TMP'])
+            #should only be one file...
             for name in glob.glob(resultspath + '*s2tlog*'):
                 log = name
 
-            if(log):
-                return send_file(log, as_attachment=True)
-            else:
-                print('no results to download...')
+            return send_file(log, as_attachment=True)
 
     return render_template(template, form=form, result=s_results, sresult=s_searchresults, showvideo=s_filename)
 
@@ -204,6 +205,5 @@ def infoview():
 
 #-------------------------------------------------------------------------------
 if __name__ == '__main__':
-    #app.run(host='127.0.0.1', port=8080, debug=True)
-    app.run()
+    app.run(debug=True)
 #-------------------------------------------------------------------------------

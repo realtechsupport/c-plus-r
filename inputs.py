@@ -11,11 +11,11 @@ class Downloads(FlaskForm):
 class Allinputs(FlaskForm):
     vid = FileField(label='video selector (.webm /.mp4 only)', default='HELLO WORLD', validators=[validators.InputRequired()])
 
-    s_h = IntegerField(label='start hour (0-99)', default=0, validators=[NumberRange(min=0, max=99), validators.InputRequired()])
+    #s_h = IntegerField(label='start hour (0-99)', default=0, validators=[NumberRange(min=0, max=99), validators.InputRequired()])
     s_m = IntegerField(label='start minute (0-59)', default=0, validators=[NumberRange(min=0, max=59), validators.InputRequired()])
     s_s = IntegerField(label='start second (0-59)', default=0, validators=[NumberRange(min=0, max=59), validators.InputRequired()])
 
-    e_h = IntegerField(label='end hour (00-99)', default=0, validators=[NumberRange(min=0, max=99), validators.InputRequired()])
+    #e_h = IntegerField(label='end hour (00-99)', default=0, validators=[NumberRange(min=0, max=99), validators.InputRequired()])
     e_m = IntegerField(label='end minute (00-59)', default=0, validators=[NumberRange(min=0, max=59), validators.InputRequired()])
     e_s = IntegerField(label='end second (00-59)', default=0, validators=[NumberRange(min=0, max=59), validators.InputRequired()])
 

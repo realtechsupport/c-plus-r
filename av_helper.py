@@ -3,6 +3,10 @@
 #utilities for audio and video processing
 #jan 2019 - jan 2020
 #author: realtechsupport
+# references
+# http://sox.sourceforge.net/sox.html#EFFECTS
+# http://ffmpeg.org/ffmpeg.html
+# https://wiki.archlinux.org/index.php/Advanced_Linux_Sound_Architecture/Troubleshooting
 #-------------------------------------------------------------------------------
 import sys, os, io, time, datetime
 from os import environ, path
@@ -11,11 +15,7 @@ import signal, wave
 import contextlib
 from time import strftime, gmtime
 from datetime import datetime, timedelta
-#------------------------------------------------------------------------------
-def write2file(filename, comment):
-    file = open(filename, "a")
-    value = file.write(comment)
-    file.close()
+
 #-------------------------------------------------------------------------------
 def remove_audio_from_video(videofile):
     videoname = videofile.split('.')
@@ -49,14 +49,28 @@ def hms_to_seconds(t):
     return 3600*h + 60*m + s
 #-------------------------------------------------------------------------------
 def seconds_to_hms(t):
-    hms = strftime("%H:%M:%S", gmtime(t))
+    #hms = strftime("%H:%M:%S", gmtime(t))
+    #updated to get 2 decimal spaces...
+    t1000 = t*1000
+    s, ms = divmod(t1000, 1000)
+    hms = '%s.%02d' % (time.strftime('%H:%M:%S', time.gmtime(s)), ms)
     return (hms)
 #-------------------------------------------------------------------------------
 def mic_info(mic):
-    command = 'arecord -l | grep ' + mic
-    result = (subprocess.check_output(command, shell=True)).decode('utf-8')
-    cpos = result.find('card'); dpos = result.find('device')
-    devicen = result[(len('device')) + dpos + 1]; cardn = result[(len('card')) + cpos + 1]
+    if(mic == 'default'):
+        cardn = 0
+        devicen = 0
+    else:
+        try:
+            command = 'arecord -l | grep ' + mic
+            result = (subprocess.check_output(command, shell=True)).decode('utf-8')
+            cpos = result.find('card'); dpos = result.find('device')
+            devicen = result[(len('device')) + dpos + 1]; cardn = result[(len('card')) + cpos + 1]
+
+        except:
+            cardn = 0
+            devicen = 0
+
     return(cardn, devicen)
 #-------------------------------------------------------------------------------
 def get_fps(videofile):
@@ -158,4 +172,57 @@ def convert_mp4_to_webm_small (video_mp4):
     command = 'ffmpeg -y -i ' + video_mp4 + ' -c:v libvpx-vp9 -b:v 0.33M -c:a libopus -b:a 96k -filter:v scale=640:-1 ' + video_webm + ' -hide_banner'
     subprocess.call(command, shell=True)
 
+#-------------------------------------------------------------------------------
+def cleanrecording(audiofile):
+    noiseoutput = 'bnoise_'+ audiofile
+    cleanoutput = 'clean_' + audiofile
+
+    magic = 0.1                 #0.2 .... range(0.0 - 1.0)
+    stime = '00:00:00.75'       #the first 0.75 seconds
+
+    command = 'ffmpeg -loglevel panic -y -ss 00:00:00 -t ' + stime + ' -i ' + audiofile + ' -acodec copy ' + noiseoutput
+    subprocess.call(command, shell=True)
+    #generate a noise profile with sox
+    command = 'sox ' + noiseoutput + ' -n noiseprof noise.prof'
+    #this is blocking, so dont have to check status
+    subprocess.call(command, shell=True)
+    #remove that noise profile  from the inputaudio
+    command = 'sox ' + audiofile +  ' ' + cleanoutput + ' noisered noise.prof ' + str(magic)
+    subprocess.call(command, shell=True)
+
+    return(cleanoutput)
+
+#-------------------------------------------------------------------------------
+def get_segment(videofile, start_cut, end_cut):
+    s = seconds_to_hms(start_cut)
+    l = end_cut - start_cut
+    d = seconds_to_hms(l)
+    cut = 'cut_' + videofile
+
+    #command = 'ffmpeg -y -ss ' + str(s) + ' -i ' + videofile   + ' -to ' + str(d) + ' -c copy -an ' + cut
+    command = 'ffmpeg -loglevel panic -y -ss ' + str(s) + ' -i ' + videofile   + ' -to ' + str(d) + ' -c copy -an ' + cut
+    subprocess.call(command, shell=True)
+    return(cut)
+
+#-------------------------------------------------------------------------------
+def voiceover_recording(dur, card, device, output):
+    #command = "ffmpeg -y -f alsa -ac 1 -i -t " + str(dur) + " plughw:" +str(card) + ',' + str(device) + ' ' + output
+    command = 'ffmpeg -loglevel panic -y -f alsa -ac 1 -i plughw:' + str(card) + ',' + str(device) + ' -t ' + str(dur) + ' ' +  output
+    subprocess.call(command, shell=True)
+
+#-------------------------------------------------------------------------------
+def combine_recordingvideo(audiofile, videofile, output):
+
+    #command = 'ffmpeg -y -i ' + videofile + ' -i ' + audiofile + ' -map 0:0 -map 1:0 -c:v copy -c:a copy -c:a aac -b:a 256k -shortest ' + output
+    command = 'ffmpeg -loglevel panic -y -i ' + videofile + ' -i ' + audiofile + ' -map 0:0 -map 1:0 -c:v copy -c:a copy -c:a aac -b:a 256k -shortest ' + output
+    #command = 'ffmpeg -loglevel panic -y -i ' + sav + ' -i ' + audiofile + ' -c:v copy -c:a copy ' + fin_mkv
+    subprocess.call(command, shell=True)
+    return('combo complete')
+
+    '''
+    print('convert mkv to mp4')
+    #command = 'ffmpeg -loglevel panic -y -i ' + fin_mkv + ' -c:v libx264 -preset slow -crf 21 ' +  fin_mp4
+    #command = 'ffmpeg -loglevel panic -y -i ' + fin_mkv + ' -c copy' +  fin_mp4
+    subprocess.call(command, shell=True)
+    '''
 #-------------------------------------------------------------------------------

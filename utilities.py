@@ -18,47 +18,7 @@ import contextlib
 import numpy as np
 from random import *
 import sqlite3
-from google.cloud import storage
 #import nltk
-
-#-------------------------------------------------------------------------------
-def delete_bucket(bucket_name):
-    """Deletes a bucket. The bucket must be empty."""
-    # bucket_name =  "otherwiselost.appspot.com"
-
-    storage_client = storage.Client()
-    bucket = storage_client.get_bucket(bucket_name)
-    bucket.delete()
-
-    print("Bucket {} deleted".format(bucket.name))
-#-------------------------------------------------------------------------------
-def download_blob(bucket_name, source_blob_name, destination_file_name):
-    """Downloads a blob from the bucket."""
-    # bucket_name = "otherwiselost.appspot.com"
-    # source_blob_name = "storage-object-name"
-    # destination_file_name = "local/path/to/file"
-
-    storage_client = storage.Client()
-    bucket = storage_client.bucket(bucket_name)
-    blob = bucket.blob(source_blob_name)
-    blob.download_to_filename(destination_file_name)
-
-    print("File {} downloaded to {}.".format(source_blob_name, destination_file_name))
-
-#------------------------------------------------------------------------------
-def upload_blob(bucket_name, source_file_name, destination_blob_name):
-    """Uploads a file to the bucket."""
-    # bucket_name = "otherwiselost.appspot.com"
-    # source_file_name = "local/path/to/file"
-    # destination_blob_name = "storage-object-name"
-
-    storage_client = storage.Client()
-    bucket = storage_client.bucket(bucket_name)
-    blob = bucket.blob(destination_blob_name)
-    blob.upload_from_filename(source_file_name)
-
-    print("File {} uploaded to {}.".format(source_file_name, destination_blob_name))
-
 #------------------------------------------------------------------------------
 def removefiles(app, patterns, locations):
     for loc in locations:

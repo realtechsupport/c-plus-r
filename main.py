@@ -303,8 +303,6 @@ def handle_response(jsondata):
             result = ''
             result = combine_recordingvideo(newaudio, video, combination)
             print(result)
-            f
-
 #-------------------------------------------------------------------------------
 
 if __name__ == '__main__':

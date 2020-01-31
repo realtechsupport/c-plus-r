@@ -40,7 +40,6 @@ app.config['TMP'] = t_dir
 app.config['STATIC'] = s_dir
 app.config['ANOTATE'] = a_dir
 app.config['IMAGES'] = i_dir
-app.config['MIC'] = 'AT2020'          #'UC02' 'AT2020'
 
 class Config(object):
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'you-will-never-guess'
@@ -51,9 +50,10 @@ socketio = SocketIO(app, async_mode="eventlet")
 @app.route('/index')
 def index():
 
-    formats = ('*.webm', '*.wav', '*.mp4', '*.MP4', '*.txt', '*.zip', '*.prof')
+    formats = ('*.json', '*.webm', '*.wav', '*.mp4', '*.MP4', '*.txt', '*.zip', '*.prof', '*.mkv')
     locations = ('STATIC', 'TMP', 'ANOTATE')
-    removefiles(app, formats, locations)
+    exception = 'voiceover'
+    removefiles(app, formats, locations, exception)
     flash("...deleting data files....", category='notice')
     template = 'index.html'
     return render_template(template)
@@ -72,7 +72,7 @@ def inputview():
     if (request.method == 'POST'):
         if("delete" in request.form):
             print('deleting existing data...')
-            removefiles(app, patterns, locations)
+            removefiles(app, patterns, locations, exception)
         #-----------------------------------------------------------------------
         elif("view" in request.form):
             temp = session.get('s_filename', None)
@@ -100,11 +100,6 @@ def inputview():
 
                 videoformat = (filename.split('.')[1]).lower()
                 print('this is the videoformat: ', videoformat)
-
-                if(videoformat == 'mp4'):
-                    convert_mp4_to_webm(revsource)
-                    filename = filename.split('.')[0] +  '.webm'
-                    #print('conversion from .mp4 to .webm finished.....')
 
             session['s_filename'] = filename
 
@@ -136,11 +131,6 @@ def inputview():
                 videoformat = (filename.split('.')[1]).lower()
                 print('this is the videoformat: ', videoformat)
 
-                if(videoformat == 'mp4'):
-                    convert_mp4_to_webm(revsource)
-                    filename = filename.split('.')[0] +  '.webm'
-                    #print('conversion from .mp4 to .webm finished.....')
-
             destination = os.path.join(app.config['TMP'], filename)
             shutil.copyfile(revsource, destination)
 
@@ -162,9 +152,22 @@ def inputview():
             else:
                 searchterm = form.search.data
 
+            #now get the auth file
+            try:
+                auth_file = request.files['auth']
+                auth_filename = secure_filename(auth_file.filename).lower()
+                authsource = os.path.join(app.config['STATIC'], auth_filename)
+                auth_file.save(authsource)
+            except:
+                print('no credential file selected - cannot capture text without a valid [.json] credential ')
+                return redirect(url_for('inputview'))
+                #exit()
+
+            #now get the text from the set segment
             os.chdir(app.config['TMP'])
             maxattempts = 5
             results, searchresults = extract_text(app, destination, form.lang.data, start_time, duration, form.chunk.data, form.conf.data, maxattempts, searchterm)
+            print('\n finished extracting text from video..\n')
             #session variables limited to 4kb !!
             session['s_results'] = results; session['s_searchresults'] = searchresults
 
@@ -221,6 +224,8 @@ def audioanotate():
     form = AnotateInputs()
     template = 'audioanotate.html'
     filename = ''
+    cut_video = ''
+    session['s_filename_w'] = ''
     upl = False
 
     if (request.method == 'POST'):
@@ -243,7 +248,6 @@ def audioanotate():
             session['devicen'] = devicen
             session['s_filename'] = filename
 
-
     if (request.method == 'POST'):
         if("segment" in request.form):
             print('in SEGMENT section')
@@ -259,13 +263,19 @@ def audioanotate():
             video = session.get('s_filename')
             cut_video = get_segment(video, start_cut, end_cut)
 
+            session['s_filename_w'] = cut_video
+            session['s_filename'] = cut_video
+
+            videoformat = (video.split('.')[1]).lower()
+            if(videoformat == 'mp4'):
+                cut_video = convert_mp4_to_webm_rt(cut_video)
+                print('conversion of segment from .mp4 to .webm finished.....')
+                session['s_filename'] = cut_video
+
             source = os.path.join(app.config['ANOTATE'], cut_video)
             destination = os.path.join(app.config['STATIC'], cut_video)
             copyfile(source, destination)
             filename = cut_video
-            session['s_filename'] = filename
-
-            #print('Copied to annotate and static: SEGMENT:', start_cut, end_cut)
 
     return render_template(template, form=form, showvideo=filename)
 
@@ -280,7 +290,11 @@ def handle_response(jsondata):
 
     card =  session.get('cardn')
     device = session.get('devicen')
-    video = session.get('s_filename')
+    vid_display = session.get('s_filename')
+    video = session.get('s_filename_w')
+    #print('In the handle response... the work video is now: ', video)
+    #print('In the handle response... the display video is now: ', vid_display)
+
     st = session.get('start_cut')
     end = session.get('end_cut')
     #get data from the user
@@ -292,15 +306,22 @@ def handle_response(jsondata):
         if (session.get('nrecordings') == None):
             session['nrecordings'] = 1
         else:
-            print('KEY, VALUE: ', k,v)
+            #print('KEY, VALUE: ', k,v)
             duration = get_video_length(video)
             print('actual video duration: ', duration)
             newaudio = 'naudio_' + video.split('.')[0] + '.wav'
             voiceover_recording(duration, card, device, newaudio)
+
             #remove noise if necessary
             #crecording = cleanrecording(output)
-            combination = 'voiceover_' + str(st) + '-' + str(end) + '_' + video.split('.')[0] + '.mkv'
-            result = ''
+
+            vformat = video.split('.')[1]
+            if (vformat == 'mp4'):
+                updated_vformat = '.mp4'
+            else:
+                updated_vformat = '.mkv'
+
+            combination = 'voiceover_' + str(st) + '-' + str(end) + '_' + video.split('.')[0] + updated_vformat
             result = combine_recordingvideo(newaudio, video, combination)
             print(result)
 #-------------------------------------------------------------------------------

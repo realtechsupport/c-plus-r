@@ -12,6 +12,7 @@
   <h1>audio annotation </h1>
   <video controls id="thisvideo" poster="/static/Untitled.png" video width="640" height="480">
       <source src={{ url_for('static', filename=showvideo) }} type="video/webm">
+      <source src={{ url_for('static', filename=showvideo) }} type="video/mp4">
   </video>
 
   <br>
@@ -51,6 +52,8 @@
   &nbsp&nbsp&nbsp&nbsp
   <td>{{ form.ea_s }}</td>
 
+  <br><br>
+  <i> ... on .mp4 this step takes several minutes  ... </i>
   <br><br>
   <input type=submit name='segment' value='SegmentVideo'>
 

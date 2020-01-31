@@ -164,6 +164,14 @@ def convert_mp4_to_webm(video_mp4):
     command = 'ffmpeg -y -i  ' + video_mp4 +  ' -f webm -c:v libvpx -b:v 1M -acodec libvorbis ' + video_webm + ' -hide_banner'
     subprocess.call(command, shell=True)
 
+#-------------------------------------------------------------------------------
+def convert_mp4_to_webm_rt(video_mp4):
+    videoname = video_mp4.split('.mp4')[0]
+    video_webm = videoname + '.webm'
+    command = 'ffmpeg -y -i  ' + video_mp4 +  ' -f webm -c:v libvpx -b:v 1M -acodec libvorbis ' + video_webm + ' -hide_banner'
+    subprocess.call(command, shell=True)
+    return(video_webm)
+
 #--------------------------------------------------------------------------------
 def convert_mp4_to_webm_small (video_mp4):
     #reduces filesize; 640 wide output, some loss of quality
@@ -173,6 +181,15 @@ def convert_mp4_to_webm_small (video_mp4):
     subprocess.call(command, shell=True)
 
 #-------------------------------------------------------------------------------
+'''
+def chunk_large_videofile(video, chunksize):
+    seg = seconds_to_hms(chunksize)
+    name = video.split('.')[0]
+    command = 'ffmpeg -i ' + video '-c copy -map 0 -segment_time ' + seg + ' -f segment -reset_timestamps 1 '+ + name + '.' + '%02d.mp4'
+    subprocess.call(command, shell=True)
+'''
+#------------------------------------------------------------------------------
+
 def cleanrecording(audiofile):
     noiseoutput = 'bnoise_'+ audiofile
     cleanoutput = 'clean_' + audiofile
@@ -189,7 +206,6 @@ def cleanrecording(audiofile):
     #remove that noise profile  from the inputaudio
     command = 'sox ' + audiofile +  ' ' + cleanoutput + ' noisered noise.prof ' + str(magic)
     subprocess.call(command, shell=True)
-
     return(cleanoutput)
 
 #-------------------------------------------------------------------------------
@@ -199,7 +215,6 @@ def get_segment(videofile, start_cut, end_cut):
     d = seconds_to_hms(l)
     cut = 'cut_' + videofile
 
-    #command = 'ffmpeg -y -ss ' + str(s) + ' -i ' + videofile   + ' -to ' + str(d) + ' -c copy -an ' + cut
     command = 'ffmpeg -loglevel panic -y -ss ' + str(s) + ' -i ' + videofile   + ' -to ' + str(d) + ' -c copy -an ' + cut
     subprocess.call(command, shell=True)
     return(cut)
@@ -213,9 +228,9 @@ def voiceover_recording(dur, card, device, output):
 #-------------------------------------------------------------------------------
 def combine_recordingvideo(audiofile, videofile, output):
 
-    #command = 'ffmpeg -y -i ' + videofile + ' -i ' + audiofile + ' -map 0:0 -map 1:0 -c:v copy -c:a copy -c:a aac -b:a 256k -shortest ' + output
     command = 'ffmpeg -loglevel panic -y -i ' + videofile + ' -i ' + audiofile + ' -map 0:0 -map 1:0 -c:v copy -c:a copy -c:a aac -b:a 256k -shortest ' + output
-    #command = 'ffmpeg -loglevel panic -y -i ' + sav + ' -i ' + audiofile + ' -c:v copy -c:a copy ' + fin_mkv
+    #command = 'ffmpeg -y -i ' + videofile + ' -i ' + audiofile + ' -map 0:0 -map 1:0 -c:v copy -c:a copy -c:a aac -b:a 256k -shortest ' + output
+    print(command)
     subprocess.call(command, shell=True)
     return('combo complete')
 

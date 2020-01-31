@@ -20,6 +20,7 @@
     <h1>video view and text extraction</h1>
       <video controls id="thisvideo" poster="/static/Untitled.png" video width="640" height="480">
         <source src={{ url_for('static', filename=showvideo) }} type="video/webm">
+          <source src={{ url_for('static', filename=showvideo) }} type="video/mp4">
       </video>
 <!----------------------------------------------------------------------------->
 
@@ -38,8 +39,7 @@
 </table>
 
   <h3>
-  caveat: <br>
-  .mp4 conversion to .webm and capture-text take time...
+  caveat: capture-text takes time
   <br><br>
   <input type=submit name='view' value='view-video'>
   &nbsp&nbsp&nbsp

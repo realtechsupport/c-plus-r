@@ -20,12 +20,15 @@ from random import *
 import sqlite3
 #import nltk
 #------------------------------------------------------------------------------
-def removefiles(app, patterns, locations):
+def removefiles(app, patterns, locations, exception):
     for loc in locations:
         os.chdir(app.config[loc])
         for pat in patterns:
             for file in glob.glob(pat):
-                os.remove(file)
+                if(exception in file):
+                    pass
+                else:
+                    os.remove(file)
 #------------------------------------------------------------------------------
 def kill(proc_pid):
     process = psutil.Process(proc_pid)

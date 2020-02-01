@@ -19,7 +19,7 @@
     <legend>text from field recording at and above the confidence level</legend>
       <p>
         <div class='form-text'
-          <textarea rows="10" cols="125" placeholder = "Here the output of the analysis">
+          <textarea rows="100" cols="125" placeholder = "Here the output of the analysis">
            {{result}}
          </textarea>
        </div>
@@ -30,7 +30,7 @@
     <legend>text from field recording at and above the confidence level, filtered by the search term</legend>
       <p>
         <div class='form-text'
-          <textarea rows="10" cols="125" placeholder = "Here the output of the search">
+          <textarea rows="200" cols="125" placeholder = "Here the output of the search">
            {{sresult}}
          </textarea>
        </div>
@@ -46,7 +46,9 @@
 <!----------------------------------------------------------------------------->
 <br>
 <center>
-<a href="{{ url_for('index') }}">back to start - delete data</a>
+<a href="{{ url_for('audioanotate') }}"> continue to video annotation </a>
+&nbsp&nbsp&nbsp
+<a href="{{ url_for('index') }}">back to start - release data</a>
 </center>
 <!----------------------------------------------------------------------------->
 </body>

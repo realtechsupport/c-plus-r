@@ -21,7 +21,7 @@ class GetTextinputs(FlaskForm):
     conf = FloatField(label='confidence threshold for STT (0.0 - 1.0)', default=0.90, validators=[validators.InputRequired()])
     search = StringField(label='(optional) single search term', default='searchterm', validators=[validators.InputRequired()])
 
-    auth = FileField(label='key for capture-text', default='HELLO WORLD')
+    auth = FileField(label='key for capture-text (.json)', default='HELLO WORLD')
     lang = SelectField('language spoken in video segment', choices =  [('en', 'English'),('fr', 'French'),('id-ID', 'Bahasa Indonesia')], default=('id-ID'), validators=[validators.InputRequired()])
 
 
@@ -32,3 +32,8 @@ class AnotateInputs(FlaskForm):
     sa_s = IntegerField(label='start second (0-59)', default=0, validators=[NumberRange(min=0, max=59), validators.InputRequired()])
     ea_m = IntegerField(label='end minute (0-59)', default=0, validators=[NumberRange(min=0, max=59), validators.InputRequired()])
     ea_s = IntegerField(label='end second (0-59)', default=0, validators=[NumberRange(min=0, max=59), validators.InputRequired()])
+
+
+class PrepareInputs(FlaskForm):
+    vid = FileField(label='video', default='HELLO WORLD', validators=[validators.InputRequired()])
+    chunk = IntegerField(label='chunk size (min)', default=10, validators=[NumberRange(min=0, max=59), validators.InputRequired()])

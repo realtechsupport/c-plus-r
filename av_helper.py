@@ -49,7 +49,6 @@ def hms_to_seconds(t):
     return 3600*h + 60*m + s
 #-------------------------------------------------------------------------------
 def seconds_to_hms(t):
-    #hms = strftime("%H:%M:%S", gmtime(t))
     #updated to get 2 decimal spaces...
     t1000 = t*1000
     s, ms = divmod(t1000, 1000)
@@ -181,13 +180,21 @@ def convert_mp4_to_webm_small (video_mp4):
     subprocess.call(command, shell=True)
 
 #-------------------------------------------------------------------------------
-'''
-def chunk_large_videofile(video, chunksize):
-    seg = seconds_to_hms(chunksize)
+
+def chunk_large_videofile(video, chunksize, location):
+    #chunk should be in seconds
+    seg = seconds_to_hms((chunksize*60))
     name = video.split('.')[0]
-    command = 'ffmpeg -i ' + video '-c copy -map 0 -segment_time ' + seg + ' -f segment -reset_timestamps 1 '+ + name + '.' + '%02d.mp4'
+    format = video.split('.')[1]
+    command = 'ffmpeg -y -i ' + video + ' -c copy -map 0 -segment_time ' + seg + ' -f segment -reset_timestamps 1 ' + name + '_' + '%02d.' + format
     subprocess.call(command, shell=True)
-'''
+
+
+    path, dirs, files = next(os.walk(location))
+    #one file is the orginal
+    nfiles = len(files)-1
+    return(nfiles)
+
 #------------------------------------------------------------------------------
 
 def cleanrecording(audiofile):
@@ -227,13 +234,10 @@ def voiceover_recording(dur, card, device, output):
 
 #-------------------------------------------------------------------------------
 def combine_recordingvideo(audiofile, videofile, output):
-
-    command = 'ffmpeg -loglevel panic -y -i ' + videofile + ' -i ' + audiofile + ' -map 0:0 -map 1:0 -c:v copy -c:a copy -c:a aac -b:a 256k -shortest ' + output
-    #command = 'ffmpeg -y -i ' + videofile + ' -i ' + audiofile + ' -map 0:0 -map 1:0 -c:v copy -c:a copy -c:a aac -b:a 256k -shortest ' + output
+    command = 'ffmpeg -y -i ' + videofile + ' -i ' + audiofile + ' -map 0:0 -map 1:0 -c:v copy -c:a copy -c:a aac -b:a 256k -shortest ' + output
     print(command)
     subprocess.call(command, shell=True)
     return('combo complete')
-
     '''
     print('convert mkv to mp4')
     #command = 'ffmpeg -loglevel panic -y -i ' + fin_mkv + ' -c:v libx264 -preset slow -crf 21 ' +  fin_mp4

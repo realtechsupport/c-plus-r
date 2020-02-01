@@ -1,0 +1,71 @@
+<!DOCTYPE HTML>
+<html lang = "en">
+  <head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <title>catch+release</title>
+    <meta charset = "UTF-8" />
+  <!------------------------------------------------------------------------->
+    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+    <script>
+      $(document).ready(function()
+      {
+        setTimeout(function() {$('#info').fadeOut('fast');}, 3000);
+      });
+    </script>
+  <!------------------------------------------------------------------------->
+  </head>
+  <body>
+<!----------------------------------------------------------------------------->
+<center>
+<h1> Catch & Release </h1>
+<br><br><br>
+<style> input  {width:150px; height: 25px;} </style>
+
+
+<center>
+Chunk large field videos into smaller files
+<br>
+
+<form method="POST" enctype="multipart/form-data">
+<table>
+<br><br>
+  {% for field in form if field.widget.input_type != 'hidden' %}
+    <tr>
+      <td>{{ field }}</td>
+      <td>{{ field.label }}</td>
+    </tr>
+  {% endfor %}
+</table>
+
+
+<br><br>
+<input type=submit name='chunk' value='ChunkVideo'>
+
+<br><br>
+<fieldset>
+  <legend>chunked files in tmp directory</legend>
+    <p>
+      <div class='form-text'
+        <textarea rows="50" cols="75" placeholder = "out...">
+         {{result}}
+       </textarea>
+     </div>
+    </p>
+</fieldset>
+
+<br><br>
+<style> a:link{background-color: #DCDCDC; padding-bottom: 6px; padding-top: 6px; padding-right: 10px; padding-left: 10px; text-align: center; text-decoration: none; display: inline-block; } </style>
+<a href="{{ url_for('inputview') }}"> continue to text from video </a>
+<br><br>
+<style> a:link{background-color: #DCDCDC; padding-bottom: 6px; padding-top: 6px; padding-right: 10px; padding-left: 10px; text-align: center; text-decoration: none; display: inline-block; } </style>
+<a href="{{ url_for('audioanotate') }}"> continue to video annotation </a>
+<br><br>
+<style> a:link{background-color: #DCDCDC; padding-bottom: 6px; padding-top: 6px; padding-right: 10px; padding-left: 10px; text-align: center; text-decoration: none; display: inline-block; } </style>
+<a href="{{ url_for('index') }}"> back to start - release data </a>
+
+</center>
+</form>
+</body>
+</html>
+<!----------------------------------------------------------------------------->

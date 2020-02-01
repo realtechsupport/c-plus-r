@@ -66,6 +66,7 @@ def extract_text(app, videofile, language, startsecs, duration, chunk, tconfiden
             for i in range (len(transcript)):
                 if(confidence[i] >= tconfidence):
                     tr_confidence = '%.4f'%(confidence[i])
+                    transcript[i] = transcript[i].lower()   #search is case sensitive
                     message = '... start: ' + str(starts[j]) + ' ... ' + 'text: ' + transcript[i] + ' ... ' + 'confidence: ' + str(tr_confidence)
 
                     write2file(textlog, file + '\n')

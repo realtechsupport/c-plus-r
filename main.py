@@ -45,16 +45,20 @@ class Config(object):
     SECRET_KEY = os.environ.get('SECRET_KEY') or 'you-will-never-guess'
 
 socketio = SocketIO(app, async_mode="eventlet")
+
+
 #------------------------------------------------------------------------------
 @app.route('/')
 @app.route('/index')
 def index():
 
     formats = ('*.json', '*.webm', '*.wav', '*.mp4', '*.MP4', '*.txt', '*.zip', '*.prof', '*.mkv')
-    locations = ('STATIC', 'TMP', 'ANOTATE')
+    locations = ('STATIC', 'ANOTATE', 'TMP')
     exception = 'voiceover'
+
     removefiles(app, formats, locations, exception)
     flash("...deleting data files....", category='notice')
+
     template = 'index.html'
     return render_template(template)
 
@@ -219,6 +223,27 @@ def infoview():
     return render_template(template)
 
 #-------------------------------------------------------------------------------
+@app.route('/prepareview', methods=['GET', 'POST'])
+def prepareview():
+    form = PrepareInputs()
+    template = 'prepareview.html'
+    chunkresult = '...'
+
+    if (request.method == 'POST'):
+        if("chunk" in request.form):
+            chunksize = form.chunk.data
+            file = request.files['vid']
+            filename = secure_filename(file.filename).lower()
+            print(filename, chunksize)
+            destination = os.path.join(app.config['TMP'], filename)
+            file.save(destination)
+            location = app.config['TMP']
+            nfiles = chunk_large_videofile(destination, chunksize, location)
+            chunkresult = 'result: ' + str(nfiles) + ' files of max ' + str(chunksize) + ' minutes...'
+
+    return render_template(template, form=form, result=chunkresult)
+
+#-------------------------------------------------------------------------------
 @app.route('/audioanotate', methods=['GET', 'POST'])
 def audioanotate():
     form = AnotateInputs()
@@ -323,6 +348,7 @@ def handle_response(jsondata):
 
             combination = 'voiceover_' + str(st) + '-' + str(end) + '_' + video.split('.')[0] + updated_vformat
             result = combine_recordingvideo(newaudio, video, combination)
+
             print(result)
 #-------------------------------------------------------------------------------
 

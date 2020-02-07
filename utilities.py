@@ -1,8 +1,11 @@
 #!/usr/bin/env python3
-#utlities.py (python3)
-#additional helper functions
-#dec 2019
-#author: realtechsupport
+# utlities.py (python3)
+# additional helper functions
+# Catch+Release
+# Flask interface for linux computers
+# experiments in knowledge documentation; with an application to AI for ethnobotany
+# jan 2020
+# tested on ubuntu 18 LTS, kernel 5.3.0
 #-------------------------------------------------------------------------------
 import sys, os, io, time, datetime, glob
 import argparse

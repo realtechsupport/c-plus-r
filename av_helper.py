@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
-#av_helper.py
-#utilities for audio and video processing
-#jan 2019 - jan 2020
-#author: realtechsupport
-# references
-# http://sox.sourceforge.net/sox.html#EFFECTS
-# http://ffmpeg.org/ffmpeg.html
-# https://wiki.archlinux.org/index.php/Advanced_Linux_Sound_Architecture/Troubleshooting
+# av_helper.py
+# utilities for audio and video processing
+# Catch+Release
+# Flask interface for linux computers
+# experiments in knowledge documentation; with an application to AI for ethnobotany
+# jan 2020
+# tested on ubuntu 18 LTS, kernel 5.3.0
 #-------------------------------------------------------------------------------
 import sys, os, io, time, datetime
 from os import environ, path

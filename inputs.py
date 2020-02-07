@@ -1,3 +1,12 @@
+#!/usr/bin/env python3
+# inputs.py
+# input classes
+# Catch+Release
+# Flask interface for linux computers
+# experiments in knowledge documentation; with an application to AI for ethnobotany
+# jan 2020
+# tested on ubuntu 18 LTS, kernel 5.3.0
+#-------------------------------------------------------------------------------
 from wtforms import *
 from wtforms.fields import *
 from flask_wtf import FlaskForm

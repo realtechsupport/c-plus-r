@@ -1,7 +1,13 @@
 #!/usr/bin/env python3
-#stt.py
-#utilities for STT
+# stt.py
+# utilities for STT
+# Catch+Release
+# Flask interface for linux computers
+# experiments in knowledge documentation; with an application to AI for ethnobotany
 # jan 2020
+# tested on ubuntu 18 LTS, kernel 5.3.0
+#-------------------------------------------------------------------------------
+
 import sys, os
 from av_helper import *
 from utilities import *

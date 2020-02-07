@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
-#av_helper.py (python3)
-#utilities for stt via google apt
-#jan 2019 - jan 2020
-#author: realtechsupport
-
+# stt_helper.py
+# utilities for stt via google apt
+# Catch+Release
+# Flask interface for linux computers
+# experiments in knowledge documentation; with an application to AI for ethnobotany
+# jan 2020
+# tested on ubuntu 18 LTS, kernel 5.3.0
 #-------------------------------------------------------------------------------
 import os, sys, io
 #-------------------------------------------------------------------------------

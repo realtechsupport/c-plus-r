@@ -1,11 +1,14 @@
 
 #!/usr/bin/env python3
 # main.py
+# Catch+Release
+# Flask interface for linux computers
+# experiments in knowledge documentation; with an application to AI for ethnobotany
 # jan 2020
-# built requirements.txt, fails to build on GCP
-# https://stackoverflow.com/questions/55474474/minimalistic-app-getting-oserror-errno-12-cannot-allocate-memory-on-deploy
-# https://issuetracker.google.com/issues/129913216
-# removed call to torch, torchvision > build successful
+# tested on ubuntu 18 LTS, kernel 5.3.0
+# todo:
+# 1 view labeled images, prune bad examples > create dataset for classifier (labelimagesview.html)
+# 2 upload to server; 3 create classifier; 4 upload image to classifier and test
 #------------------------------------------------------------------------------
 import sys, os, time, shutil, glob
 import eventlet, json

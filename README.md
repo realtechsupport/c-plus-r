@@ -49,7 +49,7 @@ Clone the C+R repository on GitHub
 	git clone https://github.com/realtechsupport/c-plus-r.git
 	Username for 'https://github.com': realtechsupport
 	Password for 'https://realtechsupport@github.com':
-	<enter the pass code shared with you> 
+	<enter the access token> 
 
 Install Requirements and Dependencies
 

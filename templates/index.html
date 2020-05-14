@@ -1,11 +1,8 @@
-<!DOCTYPE HTML>
-<html lang = "en">
-  <head>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-    <title>catch+release</title>
-    <meta charset = "UTF-8" />
+{% extends "base.html" %}
+{% block content %}
+<title>index.html</title>
 
-<!------------------------------------------------------------------------------>
+
 <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 
 <script>
@@ -21,22 +18,34 @@
 <body>
 
   <center>
-  <h1> Catch & Release </h1>
-  <br><br>
+  <br><br><br>
+
+  ... general procedures for field video processing ...
+
   <h2>
   <style> a:link{background-color: #FFFFFF; color: #808080;  padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; } </style>
 
-  <a href="{{ url_for('prepareview') }}">prepare field video recordings</a>
+  <a href="{{ url_for('prepareview') }}">prepare field videos or download sample data</a>
   <br>
-  <a href="{{ url_for('inputview') }}">view field video and capture text</a>
+  <a href="{{ url_for('inputview') }}">capture text from field video</a>
   <br>
-  <a href="{{ url_for('audioanotate') }}">add voice over to a field video</a>
+  <a href="{{ url_for('audioanotate') }}">add voice-over to field video</a>
   <br>
   <a href="{{ url_for('labelimagesview') }}">label images from field video</a>
   </h2>
-  <br><br>
 
-  <a href="{{ url_for('infoview') }}">project information</a>
+  <br><br>
+  ... image classification with the bali-26 dataset ...
+  <br>
+
+  <h2>
+  <a href="{{ url_for('trainclassifiers') }}">train an image classifier</a>
+  <br>
+  <a href="{{ url_for('testclassifiers') }}">evaluate an image classifier</a>
+  </h2>
+
+  <br><br>
+  <a href="{{ url_for('showinfoview') }}">project information</a>
 
 <!----------------------------------------------------------------------------->
 
@@ -52,7 +61,8 @@
         {% endwith %}
       </font>
   </div>
-<!----------------------------------------------------------------------------->
+
+{% endblock %}
 
 </body>
 </html>

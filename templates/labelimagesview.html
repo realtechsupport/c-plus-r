@@ -1,21 +1,72 @@
-<!DOCTYPE HTML>
-<html lang = "en">
-  <head>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-    <title>labelimagesview.html</title>
-    <meta charset = "UTF-8" />
-  </head>
-  <body>
+{% extends "base.html" %}
+{% block content %}
+<title>labelimagesview.html</title>
+
+  <center>
+  <h2>label images from video </h2>
+  </center>
+
+  <video controls id="thisvideo" poster="/static/Untitled.png" video width="640" height="480">
+      <source src={{ url_for('static', filename=showvideo) }} type="video/webm">
+      <source src={{ url_for('static', filename=showvideo) }} type="video/mp4">
+  </video>
+
+  <br>
+  <center>
 <!----------------------------------------------------------------------------->
-upload images and scroll through
-<br>
-select a classifier
-<br>
-try it out...
-<br>
-add comments
-<br>
-<a href="{{ url_for('index') }}"> back to start - release data </a>
+  <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+    <script>
+    function ShowContext(file)
+    {
+      alert(
+      'Use this module to create labels from field videos.'  +
+      '\nLoad the video to check, just in case.' +
+      '\n There are two options: ' +
+      '\n a - label images with keyterms from audio track (label by audio).' +
+      '\n - set a single keyterm and the number of images to get per utterance.' +
+      '\n - set the confidence threshold for the STT.' +
+      '\n - pick a key file for the Speech API.' +
+      '\n - select the language spoken in the field video' +
+      '\n\n b - label all images in the video with a given term (bulk label)' +
+      '\n - set the folder name; all extracted images will be in this folder.' +
+      '\n - set frame rate; the number of images to be extracted per second.' +
+      '\n\nWhen the process has completed, click \'check the results\' .'
+      );
+    }
+    </script>
+
 <!----------------------------------------------------------------------------->
+  <style> input  {width:150px; height: 25px;} </style>
+  <form method="POST" enctype="multipart/form-data">
+
+  <table>
+  <br>
+    {% for field in form if field.widget.input_type != 'hidden' %}
+      <tr>
+        <td>{{ field }}</td>
+        <td>{{ field.label }}</td>
+      </tr>
+    {% endfor %}
+  </table>
+
+  <br><br>
+  <input type=submit name='load' value='Load-Video'>
+  &nbsp&nbsp&nbsp&nbsp
+  <input type=submit name='context' value='Context' onclick='ShowContext(this)'>
+  <br><br>
+  <input type=submit name='audio' value='a-Label-By-Audio'>
+  &nbsp&nbsp&nbsp&nbsp
+  <input type=submit name='bulk' value='b-Bulk-Label'>
+
+  <br><br>
+  <a href="{{ url_for('checkimagesview') }}"> check the results </a>
+  &nbsp&nbsp&nbsp
+  <a href="{{ url_for('index') }}"> back to start </a>
+  <br><br>
+</center>
+
+{% endblock %}
+
 </body>
 </html>

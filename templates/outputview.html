@@ -1,17 +1,15 @@
-<!DOCTYPE HTML>
-<html lang = "en">
-  <head>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-    <title>catch&release.html</title>
-    <meta charset = "UTF-8" />
-  </head>
-  <body>
-<!----------------------------------------------------------------------------->
-    <h1>text from field recordings</h1>
-      <video controls id="thisvideo" poster="/static/Untitled.png" video width="640" height="480">
-        <source src={{ url_for('static', filename=showvideo) }} type="video/webm">
-      </video>
-      <br><br>
+{% extends "base.html" %}
+{% block content %}
+<title>outputview.html</title>
+
+  <center>
+  <h2>text from field recordings </h2>
+  </center>
+
+  <video controls id="thisvideo" poster="/static/Untitled.png" video width="640" height="480">
+    <source src={{ url_for('static', filename=showvideo) }} type="video/webm">
+  </video>
+  <br><br>
 <!----------------------------------------------------------------------------->
 <form method="POST" enctype="multipart/form-data">
 
@@ -48,8 +46,10 @@
 <center>
 <a href="{{ url_for('audioanotate') }}"> continue to video annotation </a>
 &nbsp&nbsp&nbsp
-<a href="{{ url_for('index') }}">back to start - release data</a>
+<a href="{{ url_for('index') }}"> back to start </a>
 </center>
-<!----------------------------------------------------------------------------->
+
+{% endblock %}
+
 </body>
 </html>

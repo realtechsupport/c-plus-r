@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+{% block content %}
+<title>checkimagesview.html</title>
+
+  <style>
+    .item {float:left; width:240px; margin:10px;}
+    input {width:125px; height: 25px;}
+  </style>
+
+  <center>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+            <h2 class="page-header">quality control, achiving, sharing</h2>
+        </div>
+      </div>
+    </div>
+  </center>
+  <!--------------------------------------------------------------------------->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+    var imagelist = new Array();
+    function GetNames(image)
+    {
+        var im_p = image.src;
+        var im = im_p.replace(/^.*[\\\/]/, '');
+        im = im.replace(/\?id\=/, '');
+        imagelist.push(im);
+        alert('images selected: ' + imagelist);
+        SendNames(imagelist);
+    }
+    function SendNames(imagelist)
+    {
+        $.post( "/checkimagesview", {data: JSON.stringify(imagelist)}, function(err, req, resp){'blahblah'});
+        event.preventDefault();
+    }
+
+    function ShowContext(file)
+    {
+    alert(
+    'Quality control of images labeled in the previous module.' +
+    '\nLeft click to select images; Right click to inspect an image; Enter to update results.' +
+    '\n\nThe following options are available:' +
+    '\n\nremove-divergent takes a reference image you designate by click and removes all images that are structurally dissimilar.' +
+    '\nIf you click on a nice and sharp image, fuzzy images will be removed. ' +
+    'If you click on a balanced image, over and underexposed images will be removed. ' +
+    'This function takes a bit of time as all images are checked...' +
+    '\n\nremove-selected will delete all images you click on from the collection. Use this to remove out of context images, for example.' +
+    '\nPress <enter> to update the results.' +
+    '\n\nUse \'add to collection\' to add the remaining images to your collection. '+
+    '\nUse \'archive collection\' to create a zip file from all categories in the collection. This file is the input to a classifier. '+
+    '\nDelete the complete collection with \'delete collection\' - all your mistakes or hard work will be lost.' +
+    '\n\nClick \'share collection\' for instructions on how to share your collection with others to create a crowdsourced image archive.'
+    );
+    }
+
+    function ShowShare(file)
+    {
+      alert(
+        'Contact the repository owner (marcbohlen@protonmail.com) if you want to share your archived labeled image collection.' +
+        '\nYou will receive a link to upload the archive to server on pCloud.'+
+        '\n\nYour data will become part of a crowdsourced image collection, available to the public under a NonCommercial-ShareAlike licence ' +
+        '(CC BY-NC-SA 4.0)'
+
+
+      );
+    }
+
+    </script>
+  <!--------------------------------------------------------------------------->
+
+ <form method="POST" enctype="multipart/form-data">
+ <br><br>
+
+ <center>
+
+ selected category: &nbsp <i> {{category}} </i>
+ &nbsp&nbsp&nbsp&nbsp
+ selected video: &nbsp  <i> {{videoname}} </i>
+ <br><br>
+
+ <table>
+ {% for field in form if field.widget.input_type != 'hidden' %}
+  <tr>
+    <td>{{ field }}</td>
+    <td>{{ field.label }}</td>
+  </tr>
+ {% endfor %}
+ </table>
+ <!--------------------------------------------------------------------------->
+ <br><br>
+ <input type=submit name='divergent' value='remove-divergent'>
+ &nbsp&nbsp&nbsp&nbsp
+ <input type=submit name='delete' value='remove-selected'>
+ &nbsp&nbsp&nbsp&nbsp
+<input type=submit name='context' value='Context' onclick='ShowContext(this)'>
+ <br><br>
+ <input type=submit name='add' value='add-to-collection'>
+  &nbsp&nbsp&nbsp&nbsp
+ <input type=submit name='archive' value='archive-collection'>
+ &nbsp&nbsp&nbsp&nbsp
+ <input type=submit name='remove' value='!delete-collection!'>
+ <br><br>
+ <input type=submit name='share' value='share-archive' onclick='ShowShare(this)'>
+ <br><br>
+ <a href="{{ url_for('index') }}"> back to start </a>
+ <br><br>
+
+ </center>
+
+
+{{images}}
+<hr>
+{% for image in images %}
+  <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+      <img class="item" src="{{url_for('send_image', id=choice, filename=image)}}" onclick="GetNames(this)">
+</div>
+{% endfor %}
+
+{% endblock %}
+
+</body>
+</html>

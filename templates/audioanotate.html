@@ -1,15 +1,11 @@
-<!DOCTYPE HTML>
-<html lang = "en">
-  <head>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-    <title>audioanotate.html</title>
-    <meta charset = "UTF-8" />
-  </head>
-  <body>
+{% extends "base.html" %}
+{% block content %}
+<title>audioanotate.html</title>
 
-<!-------------------------------------------------------------->
+  <center>
+  <h2>audio annotation </h2>
+  </center>
 
-  <h1>audio annotation </h1>
   <video controls id="thisvideo" poster="/static/Untitled.png" video width="640" height="480">
       <source src={{ url_for('static', filename=showvideo) }} type="video/webm">
       <source src={{ url_for('static', filename=showvideo) }} type="video/mp4">
@@ -29,8 +25,29 @@
   &nbsp&nbsp&nbsp
   <td>{{ form.mic.label }}</td>
 
+  <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+  <script>
+  function ShowContext(file)
+  {
+    alert(
+      'Use this module to replace the field audio with a new audio file.'  +
+      '\nThis can be helpful if an expert wants to annoate a field video.' +
+      '\nPick your field video and select the microphone input (see Readme for extra info).' +
+      '\nThen load the video and set start and end times.' +
+      '\nThen segment the video.' +
+      '\nWhen that step is complete - it can take several minutes on .mp4 files -  click voiceover and comment on the video with appropriate keywords.' +
+      '\nTurn off your speakers during the voiceover recording.' +
+      '\nWhen you finished the voiceover (no longer than the segmented video), go back to start.' +
+      '\n\nThe voiceover video will be stored in the \'anotate\' folder and ready for image labeling.'
+      );
+  }
+  </script>
+
   <br><br>
   <input type=submit name='load' value='LoadVideo'>
+  &nbsp&nbsp&nbsp
+  <input type=submit name='context' value='Context' onclick='ShowContext(this)'>
 
 
   <br><br>
@@ -53,18 +70,12 @@
   <td>{{ form.ea_s }}</td>
 
   <br><br>
-  <i> ... on .mp4 this step takes several minutes  ... </i>
-  <br><br>
   <input type=submit name='segment' value='SegmentVideo'>
-
-  <br><br>
-  <i> ... turn speakers off during voiceover recording  ... </i>
   <br><br>
   <input type='button' id="playbutton" value='VoiceOver'>
   <br><br>
-
-  <style> a:link{background-color: #DCDCDC; padding-bottom: 6px; padding-top: 6px; padding-right: 10px; padding-left: 10px; text-align: center; text-decoration: none; display: inline-block; } </style>
-  <a href="{{ url_for('index') }}"> back to start - release data </a>
+  <style> a:link{background-color: #FFFFFF; padding-bottom: 6px; padding-top: 6px; padding-right: 10px; padding-left: 10px; text-align: center; text-decoration: none; display: inline-block; } </style>
+  <a href="{{ url_for('index') }}"> back to start</a>
   </center>
 <!----------------------------------------------------------------------------->
 
@@ -106,6 +117,8 @@
   }
 
   </script>
-<!----------------------------------------------------------------------------->
+
+{% endblock %}
+
 </body>
 </html>

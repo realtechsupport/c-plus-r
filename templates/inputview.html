@@ -1,10 +1,7 @@
-<!DOCTYPE HTML>
-<html lang = "en">
-  <head>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-    <title>catch+release</title>
-    <meta charset = "UTF-8" />
-  <!------------------------------------------------------------------------->
+{% extends "base.html" %}
+{% block content %}
+<title>inputview.html</title>
+
     <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 
     <script>
@@ -17,14 +14,36 @@
   </head>
   <body>
 <!----------------------------------------------------------------------------->
-    <h1>video view and text extraction</h1>
-      <video controls id="thisvideo" poster="/static/Untitled.png" video width="640" height="480">
-        <source src={{ url_for('static', filename=showvideo) }} type="video/webm">
-          <source src={{ url_for('static', filename=showvideo) }} type="video/mp4">
-      </video>
-<!----------------------------------------------------------------------------->
+  <center>
+  <h2>video view and text extraction</h2>
+  </center>
 
-<style> input  {width:200px; height: 25px;} </style>
+  <video controls id="thisvideo" poster="/static/Untitled.png" video width="640" height="480">
+      <source src={{ url_for('static', filename=showvideo) }} type="video/webm">
+      <source src={{ url_for('static', filename=showvideo) }} type="video/mp4">
+  </video>
+<!----------------------------------------------------------------------------->
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+<script>
+function ShowContext(file)
+{
+  alert(
+    'Use this module to extract text from a field video.'  +
+    '\nFirst load a field video to find a section you want to get text from, then reload to capture the text.' +
+    '\n\nThis module requires an access code to the Google Speech API (key for capture text). ' +
+    'See Readme for details on how to get a free key.' +
+    '\n\nIf you add a search term, text from video sections that contain that term will be listed separately.' +
+    '\nIf the video is shorter than 1 minute, reduce chunk length.' +
+    '\nReducing the confidence level to below 0.9 increases detection chances and false positives.' +
+    '\n\nAchtung: This module can take several minutes to complete. ' +
+    'Best to limit the difference between start and end time to a few minutes.'
+    );
+}
+</script>
+
+<!----------------------------------------------------------------------------->
+<style> input  {width:150px; height: 25px;} </style>
 
 <center>
 <form method="POST" enctype="multipart/form-data">
@@ -39,17 +58,22 @@
 </table>
 
   <h3>
-  caveat: capture-text takes time
   <br><br>
   <input type=submit name='view' value='view-video'>
   &nbsp&nbsp&nbsp
   <input type=submit name='capture' value='capture-text'>
   &nbsp&nbsp&nbsp
-  <style> a:link{background-color: #DCDCDC; padding-bottom: 6px; padding-top: 6px; padding-right: 10px; padding-left: 10px; text-align: center; text-decoration: none; display: inline-block; } </style>
-  <a href="{{ url_for('index') }}"> back to start - release data </a>
+  <input type=submit name='context' value='Context' onclick='ShowContext(this)'>
+  <br><br>
+  <style> a:link{background-color: #FFFFFF; padding-bottom: 6px; padding-top: 6px; padding-right: 10px; padding-left: 10px; text-align: center; text-decoration: none; display: inline-block; } </style>
+  <a href="{{ url_for('index') }}"> back to start </a>
   </h3>
+ <br><br>
 
 </center>
 </form>
+
+{% endblock %}
+
 </body>
 </html>

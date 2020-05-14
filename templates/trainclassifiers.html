@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% block content %}
+<title>trainclassifiers.html</title>
+
+  <style>
+    .item {float:left; width:240px; margin:10px;}
+    input {width:125px; height: 25px;}
+  </style>
+
+  <center>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+            <h2 class="page-header">train a low dimensional classifier</h2>
+        </div>
+      </div>
+    </div>
+  </center>
+<!--------------------------------------------------------------------------->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script>
+function ShowContext(file)
+{
+alert(
+'Two networks available: a simple (vanilla) CNN and the Alexnet architecture.' +
+'\nPretrained option is not available for the vanilla network.' +
+'\nSample sets from the bali-26 collection are available here:' +
+'\nbali-3: caco, passiflora and aroid, bali-3B: nilam, sawo and snakefruit, bali-3C: durian, nilam and snakefruit..' +
+'\nUnless you have a gpu enabled computer, training on your home device is a slow process (55 min for 20 epochs on alexanet).' +
+'\nYou can follow the training steps in the terminal window.' +
+'\nReduced epochs and fewer images per category shorten the training time but compromise accuracy.' +
+'\n\nPrevent page update snafus with Cache Killer for Chrome.' +
+'\nLarge imagesets with deeper networks should be copied to a remote server...see Readme for details.'
+);
+}
+</script>
+
+<!--------------------------------------------------------------------------->
+ <form method="POST" enctype="multipart/form-data">
+ <br><br>
+
+ <center>
+
+ <table>
+ {% for field in form if field.widget.input_type != 'hidden' %}
+  <tr>
+    <td>{{ field }}</td>
+    <td>{{ field.label }}</td>
+  </tr>
+ <td> </td><td> </td><td> </td>
+ {% endfor %}
+ </table>
+
+<br><br>
+<input type=submit name='train' value='Train-Network' >
+<!---
+&nbsp&nbsp&nbsp&nbsp
+<input type=submit name='stop' value='Stop-training'>
+--->
+&nbsp&nbsp&nbsp&nbsp
+<input type=submit name='context' value='Context' onclick='ShowContext(this)'>
+<br><br>
+<a href="{{ url_for('index') }}"> back to start </a>
+<hr>
+<br><br>
+
+<img src="{{url_for('static', filename=image1)}}">
+<br><br>
+<img src="{{url_for('static', filename=image2)}}">
+
+</center>
+
+{% endblock %}
+
+</body>
+</html>

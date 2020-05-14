@@ -1,11 +1,15 @@
-<!DOCTYPE HTML>
-<html lang = "en">
-  <head>
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
-    <title>catch+release</title>
-    <meta charset = "UTF-8" />
-  <!------------------------------------------------------------------------->
-    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+{% extends "base.html" %}
+{% block content %}
+<title>prepareview.html</title>
+
+  <center>
+  <h2>prepare field videos or get some sample data</h2>
+  </center>
+<!------------------------------------------------------------------------->
+
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<!---
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
     <script>
       $(document).ready(function()
@@ -13,19 +17,30 @@
         setTimeout(function() {$('#info').fadeOut('fast');}, 3000);
       });
     </script>
-  <!------------------------------------------------------------------------->
-  </head>
-  <body>
-<!----------------------------------------------------------------------------->
-<center>
-<h1> Catch & Release </h1>
-<br><br><br>
+---->
+    <script>
+    function ShowContext(file)
+    {
+    alert(
+    'Preprocess field videos or get some sample data for experiments.'+
+    '\n\nIf your field video is long, chunk it into smaller segments.' +
+    'Supported formats: .webm and .mp4 .' +
+    'Segments of 10 minutes or so are ok for viewing and bulk labeling.' +
+    'If your field videos are .mp4, smaller files are better - 3min or less.' +
+    'Segments of about 3 minutes are suggested for text processing and audio labeling.' +
+    '\n\nChunked segments are in the tmp directory.' +
+    '\n\nProceed to \' text from video\' or \'video annotation\' to process the chunks. ' +
+    '\'Back to start\' will delete these temporary files.'
+
+    );
+    }
+    </script>
+<!------------------------------------------------------------------------->
+
 <style> input  {width:150px; height: 25px;} </style>
-
+<br><br>
 
 <center>
-Chunk large field videos into smaller files
-<br>
 
 <form method="POST" enctype="multipart/form-data">
 <table>
@@ -38,9 +53,10 @@ Chunk large field videos into smaller files
   {% endfor %}
 </table>
 
-
-<br><br>
+<br>
 <input type=submit name='chunk' value='ChunkVideo'>
+&nbsp&nbsp&nbsp&nbsp
+<input type=submit name='context' value='Context' onclick='ShowContext(this)'>
 
 <br><br>
 <fieldset>
@@ -53,19 +69,27 @@ Chunk large field videos into smaller files
      </div>
     </p>
 </fieldset>
-
 <br><br>
+
+
+<input type=submit name='samples' value='GetSamples'>
+<br><br>
+
 <style> a:link{background-color: #DCDCDC; padding-bottom: 6px; padding-top: 6px; padding-right: 10px; padding-left: 10px; text-align: center; text-decoration: none; display: inline-block; } </style>
 <a href="{{ url_for('inputview') }}"> continue to text from video </a>
-<br><br>
+&nbsp&nbsp&nbsp&nbsp
 <style> a:link{background-color: #DCDCDC; padding-bottom: 6px; padding-top: 6px; padding-right: 10px; padding-left: 10px; text-align: center; text-decoration: none; display: inline-block; } </style>
 <a href="{{ url_for('audioanotate') }}"> continue to video annotation </a>
 <br><br>
-<style> a:link{background-color: #DCDCDC; padding-bottom: 6px; padding-top: 6px; padding-right: 10px; padding-left: 10px; text-align: center; text-decoration: none; display: inline-block; } </style>
-<a href="{{ url_for('index') }}"> back to start - release data </a>
+<style> a:link{background-color: #FFFFFF; padding-bottom: 6px; padding-top: 6px; padding-right: 10px; padding-left: 10px; text-align: center; text-decoration: none; display: inline-block; } </style>
+<a href="{{ url_for('index') }}"> back to start </a>
 
 </center>
 </form>
+
+{% endblock %}
+
 </body>
 </html>
+
 <!----------------------------------------------------------------------------->

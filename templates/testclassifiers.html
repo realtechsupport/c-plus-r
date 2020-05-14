@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% block content %}
+<title>testclassifiers.html</title>
+
+  <style>
+    .item {float:left; width:240px; margin:10px;}
+    input {width:125px; height: 25px;}
+  </style>
+
+  <center>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+            <h2 class="page-header">test a classifier</h2>
+        </div>
+      </div>
+    </div>
+  </center>
+  <!--------------------------------------------------------------------------->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+    var imagelist = new Array();
+    function GetName(image)
+    {
+        var im_p = image.src;
+        var im = im_p.replace(/^.*[\\\/]/, '');
+        im = im.replace(/\?id\=/, '');
+        alert('selected image: '+ im);
+        SendName(im);
+    }
+    function SendName(im)
+    {
+        $.post( "/testclassifiers", {data: JSON.stringify(im)}, function(err, req, resp){'blahblah'});
+        event.preventDefault();
+    }
+    function ShowContext(file)
+    {
+      alert(
+        'Achtung: Click \'display image set\' PRIOR TO \'classify image\'.'  +
+        '\nLeft click to select an image from the image gallery below .' +
+        '\nThen click \'classify image\'. '
+        );
+    }
+
+    </script>
+  <!--------------------------------------------------------------------------->
+
+ <form method="POST" enctype="multipart/form-data">
+ <br><br>
+ <center>
+ <table>
+ {% for field in form if field.widget.input_type != 'hidden' %}
+
+    <td>{{ field }}</td>
+    <td>{{ field.label }}</td>
+
+ <td> </td><td> </td><td> </td>
+ {% endfor %}
+ </table>
+
+ <!--------------------------------------------------------------------------->
+ <br> <br>
+
+ <input type=submit name='display' value='display-imageset'>
+  &nbsp&nbsp&nbsp&nbsp
+ <input type=submit name='classify' value='classify-image' >
+  &nbsp&nbsp&nbsp&nbsp
+ <input type=submit name='context' value='Context' onclick='ShowContext(this)'>
+ <br><br>
+ <a href="{{ url_for('index') }}"> back to start  </a>
+ <br><br>
+
+  <fieldset>
+    <legend>classification results</legend>
+     <p>
+       <div class='form-text'
+         <textarea rows="50" cols="20" placeholder = "Here the output of the classification">
+          {{input}}
+          <br><br>
+          {{classifier}}
+          <br><br>
+          {{result}}
+          <br><br>
+          {{moreresults}}
+        </textarea>
+      </div>
+     </p>
+  </fieldset>
+
+ </center>
+
+<hr>
+{% for image in images %}
+  <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+      <img class="item" src="{{url_for('classify_image', id=choice, filename=image)}}" onclick="GetName(this)">
+</div>
+
+{% endfor %}
+{% endblock %}
+</body>
+</html>

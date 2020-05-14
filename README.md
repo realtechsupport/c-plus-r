@@ -61,6 +61,7 @@ Generate an STT key (optional)
 While there are multiple providers of Speech to Text services, the most effective offering with the widest range of languages is at this moment Google. If you want to make use of the text from video extraction you should get an access key to the Google Speech API. Creation of the key is free and you can use it in this software at no cost as C+R operates within free limits of the API. However, you do need a google account to create the key. If that is not palatable, skip the sections that use the Speech API
 
 Instructions to generate a key:
+
     1. Navigate to the APIs & Services->Credentials panel in Cloud Platform Console.
     2. Select Create credentials, then select API key from the dropdown menu.
     3. Click the Create button. ... 

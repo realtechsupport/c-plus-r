@@ -87,4 +87,4 @@ Stop the app from the terminal: ctrl-c
 <br>
 Exit environment at the terminal: ctrl-d
 
-<b>Check the README.pdf file in the repository for information on how to use C+R.</b>
+<i>Check the README.pdf file in the repository for information on how to use C+R.</i>

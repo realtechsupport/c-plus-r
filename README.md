@@ -37,19 +37,19 @@ At the command prompt, run the following commands:
 	sudo apt-get install sox -y
 	
 Create a virtual environment:
+
 	python3 -m venv env
 
 Activate the environment:
+
 	source ./env/bin/activate
 
 Clone the C+R repository on GitHub
 
 	git clone https://github.com/realtechsupport/c-plus-r.git
-
 	Username for 'https://github.com': realtechsupport
 	Password for 'https://realtechsupport@github.com':
 	<enter the pass code shared with you> 
-
 
 Install Requirements and Dependencies
 
@@ -66,18 +66,18 @@ Instructions to generate a key:
     3. Click the Create button. ... 
     4. Once you have the API key, download it and create a JSON file.
     5. Save to the C+R project
-Other Speech to Text engines are available, but not yet integrated into C+R. The key barrier at this point are adequate and high quality language corpora in less popular languages. Big issue.
-
 
 <b>Launch</b>
 
-Activate the virtual environment:	
-source ./env/bin/activate
+Activate the virtual environment:
 
-<b>Start</b>   			
-python3 main.py <browser> <debug>
+	source ./env/bin/activate
 
-<browser = firefox or chrome; <debug> = debug or no-debug
+<b>Start</b>   	
+
+	python3 main.py browser debug_mode
+
+browser = firefox or chrome; debug_mode = debug or no-debug
 The terminal window will display comments. You should see the launch screen in a browser window.  
 
 

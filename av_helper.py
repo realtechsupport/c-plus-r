@@ -7,7 +7,7 @@
 # jan 2020
 # tested on ubuntu 18 LTS, kernel 5.3.0
 #-------------------------------------------------------------------------------
-import sys, os, io, time, datetime
+import sys, os, io, time, datetime, re
 from os import environ, path
 import subprocess
 import signal, wave
@@ -36,12 +36,20 @@ def get_video_length(filename):
     result = subprocess.Popen(["ffprobe", filename],
     stdout = subprocess.PIPE, stderr = subprocess.STDOUT)
     info  =  [x for x in result.stdout.readlines() if b'Duration' in x]
-    print(info)
     duration = info[0].decode('utf-8')
     duration = duration.split(', ')
     time_s = duration[0].split('Duration: ')
     time_t = str(time_s[1])
     return (time_t)
+#------------------------------------------------------------------------------
+def get_video_resolution(filename):
+    result = subprocess.Popen(["ffprobe", filename],
+    stdout = subprocess.PIPE, stderr = subprocess.STDOUT)
+    info  =  [x for x in result.stdout.readlines() if b'Video' in x]
+    resolution = info[0].decode('utf-8')
+    resolution = re.findall("(\d+x\d+)", resolution)
+    resolution = resolution[-1]
+    return (resolution)
 #------------------------------------------------------------------------------
 def hms_to_seconds(t):
     h, m, s = [float(i) for i in t.split(':')]
@@ -97,7 +105,6 @@ def slice_audio(datapath, audiofile, duration, destination):
     subprocess.call(command, shell=True)
 #-------------------------------------------------------------------------------
 def make_slices_from_audio(datapath, videofile, audioinput, startsecs, duration, chunk, destination, onechan):
-
     starts = []
     google_limit = 59
     os.chdir(datapath)
@@ -179,23 +186,20 @@ def convert_mp4_to_webm_small (video_mp4):
     subprocess.call(command, shell=True)
 
 #-------------------------------------------------------------------------------
-
 def chunk_large_videofile(video, chunksize, location):
-    #chunk should be in seconds
+    #convert minutes to seconds
     seg = seconds_to_hms((chunksize*60))
     name = video.split('.')[0]
     format = video.split('.')[1]
     command = 'ffmpeg -y -i ' + video + ' -c copy -map 0 -segment_time ' + seg + ' -f segment -reset_timestamps 1 ' + name + '_' + '%02d.' + format
     subprocess.call(command, shell=True)
-
-
     path, dirs, files = next(os.walk(location))
     #one file is the orginal
     nfiles = len(files)-1
+
     return(nfiles)
 
 #------------------------------------------------------------------------------
-
 def cleanrecording(audiofile):
     noiseoutput = 'bnoise_'+ audiofile
     cleanoutput = 'clean_' + audiofile
@@ -243,4 +247,24 @@ def combine_recordingvideo(audiofile, videofile, output):
     #command = 'ffmpeg -loglevel panic -y -i ' + fin_mkv + ' -c copy' +  fin_mp4
     subprocess.call(command, shell=True)
     '''
+
+#-------------------------------------------------------------------------------
+def create_images_from_video(savepath, category, videonamepath, framerate):
+    tempok = os.path.isdir(savepath)
+    if(tempok):
+        pass
+    else:
+        os.mkdir(savepath)
+
+    start = str(0)
+    end_set = " -f image2 "
+    out = ' -start_number ' + start + ' ' + savepath + '%04d.jpg'
+    s1 = 'ffmpeg -loglevel panic -y -i '
+
+    command = s1 + videonamepath + ' -r ' + str(framerate) + end_set + out
+    subprocess.call(command, shell=True)
+
+    path, dirs, files = next(os.walk(savepath))
+    files = files.sort(key=lambda f: int(re.sub('\D', '', f)))
+
 #-------------------------------------------------------------------------------

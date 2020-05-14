@@ -27,6 +27,7 @@ C+R runs on Linux under Python3  and Flask with Chrome or Firefox. C+R uses the 
 <b>Installation</b>
 
 At the command prompt, run the following commands:
+
 	sudo apt-get update
 	sudo apt-get upgrade -y
 	sudo apt-get install python3-dev -y

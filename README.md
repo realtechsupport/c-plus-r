@@ -1,6 +1,6 @@
 # c-plus-r
 
-Introduction
+<b>Introduction</b>
 
 Catch & Release (C+R) is a collection of procedures that allow you to apply machine learning classification to field videos. C+R’s goal is to facilitate the creation of under-represented knowledge in machine learning in general, and experimental datasets for neural network image classification in particular. C+R allows anyone with a mobile phone to create viable datasets for image classification and to train state of the art convolutional neural networks with them.
 
@@ -14,14 +14,14 @@ C+R can help you create machine learning datasets or serve as a companion while 
 
 
 
-License
+<b>License</b>
 
 Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
 Cite this software project as follows: ‘Catch&Release version1’
 
 
 
-Platform Information
+<b>Platform Information</b>
 
 C+R runs on Linux under Python3  and Flask with Chrome or Firefox. C+R uses the PyTorch framework to train and test the image classifiers. Library versions and dependencies are given in the requirements.txt file. C+R has been tested on Ubuntu 18.04 TLS with kernel 5.3.0 on images sourced from .mp4 and .webm video formats (HD [1920 x 1080] at 30f/s; .mp4  H.264 encoded) from multiple (android OS) mobile phones and GoPro Hero 6 action cameras.
 
@@ -31,7 +31,7 @@ https://chrome.google.com/webstore/detail/classic-cache-killer/kkmknnnjliniefekp
 
 
 
-Software Installation
+<b>Installation</b>
 
 At the command prompt, run the following commands:
 	sudo apt-get update
@@ -47,8 +47,6 @@ Create a virtual environment:
 
 Activate the environment:
 	source ./env/bin/activate
-
-
 
 Clone the C+R repository on GitHub
 
@@ -79,7 +77,7 @@ Other Speech to Text engines are available, but not yet integrated into C+R. The
 
 
 <br><br>
-Launch C+R
+<b>Launch C+R</b>
 
 Activate the virtual environment:	source ./env/bin/activate
 Start C+R:      			python3 main.py chrome no-debug
@@ -90,7 +88,7 @@ The terminal window will display comments. You should see the launch screen in a
 crtl +  /  ctrl – 	increase / decrease zoom factor.
 
 
-Stop C+R
+<b>Stop C+R</b>
 
 Stop the app from the terminal:					ctrl-c
 Exit environment at the terminal:				ctrl-d
@@ -99,4 +97,4 @@ If you see browser errors .. clear the browsing history: 	ctrl-H
 								clear data
 
 
-Check the README.pdf file in the repository for information on how to use the package.
+</b>Check the README.pdf file in the repository for information on how to use the package.</b>

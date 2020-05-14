@@ -16,16 +16,12 @@ C+R can help you create machine learning datasets or serve as a companion while 
 <b>License</b>
 
 Attribution-NonCommercial-ShareAlike 4.0 International (CC BY-NC-SA 4.0)
-Cite this software project as follows: ‘Catch&Release version1’
+Cite this project as: Catch&Release version1
 
 
-<b>Platform Information</b>
+<b>Context</b>
 
 C+R runs on Linux under Python3  and Flask with Chrome or Firefox. C+R uses the PyTorch framework to train and test the image classifiers. Library versions and dependencies are given in the requirements.txt file. C+R has been tested on Ubuntu 18.04 TLS with kernel 5.3.0 on images sourced from .mp4 and .webm video formats (HD [1920 x 1080] at 30f/s; .mp4  H.264 encoded) from multiple (android OS) mobile phones and GoPro Hero 6 action cameras.
-
-Recommended browser: Chrome. 
-Install the free Chrome Cache Killer:
-https://chrome.google.com/webstore/detail/classic-cache-killer/kkmknnnjliniefekpicbaaobdnjjikfp?hl=en 
 
 
 <b>Installation</b>
@@ -72,26 +68,21 @@ Instructions to generate a key:
 Other Speech to Text engines are available, but not yet integrated into C+R. The key barrier at this point are adequate and high quality language corpora in less popular languages. Big issue.
 
 
-<br><br>
 <b>Launch</b>
 
 Activate the virtual environment:	
 source ./env/bin/activate
 
-Start C+R:      			
-python3 main.py chrome no-debug
+<b>Start</b>   			
+python3 main.py <browser> <debug>
 
-To run in debug mode replace’ no-debug’ with ‘debug’. Firefox is also supported, but less stable.
+<browser = firefox or chrome; <debug> = debug or no-debug
 The terminal window will display comments. You should see the launch screen in a browser window.  
 
-crtl +  /  ctrl – 	increase / decrease zoom factor.
 
 <b>Stop</b>
 
 Stop the app from the terminal:					ctrl-c
 Exit environment at the terminal:				ctrl-d
-If you see browser errors .. clear the browsing history: 	ctrl-H
-								clear browsing data
-								clear data
 
 </b>Check the README.pdf file in the repository for information on how to use the package.</b>

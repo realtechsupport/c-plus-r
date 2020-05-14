@@ -83,7 +83,8 @@ The terminal window will display comments. You should see the launch screen in a
 
 <b>Stop</b>
 
-Stop the app from the terminal:					ctrl-c
-Exit environment at the terminal:				ctrl-d
+Stop the app from the terminal: ctrl-c
+<br>
+Exit environment at the terminal: ctrl-d
 
 </b>Check the README.pdf file in the repository for information on how to use the package.</b>

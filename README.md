@@ -78,15 +78,14 @@ Instructions to generate a key:
 Other Speech to Text engines are available, but not yet integrated into C+R. The key barrier at this point are adequate and high quality language corpora in less popular languages. Big issue.
 
 
-
+<br><br>
 Launch C+R
 
 Activate the virtual environment:	source ./env/bin/activate
 Start C+R:      			python3 main.py chrome no-debug
 
 To run in debug mode replace’ no-debug’ with ‘debug’. Firefox is also supported, but less stable.
-The terminal window will display comments. You should see the launch screen in a browser window:  
-Catch & Release
+The terminal window will display comments. You should see the launch screen in a browser window.  
 
 crtl +  /  ctrl – 	increase / decrease zoom factor.
 

@@ -1,5 +1,8 @@
-# impromptu getting videos ready... add to C+R interface alter
-
+# plot_helper.py (python3)
+# utilities for graphic display of training and evaluation results
+# experiments in knowledge documentation; with an application to AI for ethnobotany
+# March 2020
+#-------------------------------------------------------------------------------
 import os, sys, glob
 from pyt_utilities import *
 import matplotlib.pyplot as plt

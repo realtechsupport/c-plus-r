@@ -1,0 +1,40 @@
+﻿
+Install pytorch and vision with nvidia drivers on ubuntu servers
+
+
+
+Upload and run basics.sh file
+
+Create virtual environement:
+python3 -m venv env
+
+Activate the environment (use the full path):
+source ./env/bin/activate
+
+
+install software:
+sudo apt install python3-pip
+pip3 install numpy
+pip3 install sklearn
+pip3 install matplotlib
+pip3 install pillow
+pip3 install psutil
+
+
+sudo apt install ubuntu-drivers-common
+ubuntu-drivers devices 			> check for ‘recommended’
+sudo ubuntu-drivers autoinstall
+sudo reboot
+
+#check nvidia install
+nvidia-smi				>check for cuda version, GPUs
+
+
+Activate the environment again (use the full path):
+source ./env/bin/activate
+pip3 install torch torchvision
+
+
+
+
+

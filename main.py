@@ -685,6 +685,16 @@ def audioanotate():
             session['devicen'] = devicen
             session['s_filename'] = filename
 
+        elif("remove" in request.form):
+            print('removing old voic-over assets')
+            tpatterns = ('*.webm', '*.wav', '*.mp4', '*.MP4', '*.mkv')
+            tlocations = ('STATIC', 'TMP')
+            texception = 'nothing'
+            try:
+                removefiles(app, tpatterns, tlocations, texception)
+            except:
+                return redirect(url_for('audioanotate'))
+
     if (request.method == 'POST'):
         if("segment" in request.form):
             print('in SEGMENT section')

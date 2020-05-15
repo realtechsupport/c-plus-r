@@ -34,7 +34,7 @@ Open a terminal window and type:
 	Password for 'https://realtechsupport@github.com'
 	<enter the access token> 
 
-Cd to the c-plus-r directory and  run the following commands to undate your basic python environment:
+Cd to the c-plus-r directory and  run the following commands to update your python environment:
 
 	chmod +x basics.sh
 	sh basics.sh

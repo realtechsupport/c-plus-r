@@ -768,7 +768,7 @@ def handle_response(jsondata):
 if __name__ == '__main__':
     if(len(sys.argv) < 2):
         print('\nplease provide browser and dubug choice when you start the program.')
-        print('\'python3 main.py firefox debug\', or \'python3 main.py chrome no-debug\' for example.\n')
+        print('\'python3 main.py firefox debug\', or \'python3 main.py chromium no-debug\' for example.\n')
         sys.exit(2)
     else:
         try:
@@ -776,7 +776,7 @@ if __name__ == '__main__':
             debug_mode = sys.argv[2]
             print('\n > using this browser: ', browser)
         except:
-            print('... using default chrome in non-debug mode ...')
+            print('... using default chromium in non-debug mode ...')
             browser = 'chromium-browser'
             debug_mode = 'debug'
 

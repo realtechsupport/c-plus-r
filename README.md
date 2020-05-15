@@ -10,7 +10,7 @@ image categories associated with the utterance.
 This software and the bali-26 dataset are the basis for the ‘Return to Bali’ project that explores machine learning to support the representation of ethnobotanical knowledge and practices in Central Bali.
 http://www.realtechsupport.org/new_works/return2bali.html 
 
-C+R can help you create machine learning datasets or serve as a companion while studying convolutional neural network systems. If you want to use it for a specific research need, for instructional purposes or if you would like to contribute to an alternative to ImageNet for machine learning training, contact the repository owner (marcbohlen@protnmail.com).
+C+R can help you create machine learning datasets or serve as a companion while studying convolutional neural network systems. If you want to use it for a specific research need, for instructional purposes or if you would like to contribute to a viable alternative to ImageNet for machine learning training, contact the repository owner (marcbohlen@protnmail.com).
 
 
 <b>License</b>
@@ -21,7 +21,8 @@ Cite this project as: Catch&Release version1
 
 <b>Context</b>
 
-C+R runs on Linux under Python3  and Flask with Chrome or Firefox. C+R uses the PyTorch framework to train and test the image classifiers. Library versions and dependencies are given in the requirements.txt file. C+R has been tested on Ubuntu 18.04 TLS with kernel 5.3.0 on images sourced from .mp4 and .webm video formats (HD [1920 x 1080] at 30f/s; .mp4  H.264 encoded) from multiple (android OS) mobile phones and GoPro Hero 6 action cameras.
+C+R runs on Linux under Python3  and Flask with Chromium or Firefox. C+R uses the PyTorch framework to train and test the image classifiers and to access the Google Speech API (free) for speech processing. Library versions and dependencies are given in the requirements file. 
+C+R has been tested on a desktop (i7-4770 CPU / 16GB of memory) and a laptop (i7-3667 CPU  / 8GB of memory) with Ubuntu 18.04 TLS under kernels 5.2.8 and 5.3.0 with images sourced from .mp4 and .webm video (HD [1920 x 1080] at 30f/s; .mp4  H.264 encoded) from multiple (android OS) mobile phones and GoPro Hero 6 action cameras.
 
 
 <b>Installation</b>
@@ -70,7 +71,8 @@ Activate the virtual environment:
 
 	source ./env/bin/activate
 
-<b>Start</b>   	
+<b>Start</b>   
+
 
 	python3 main.py browser debug_mode
 

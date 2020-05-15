@@ -26,16 +26,19 @@ C+R runs on Linux under Python3  and Flask with Chrome or Firefox. C+R uses the 
 
 <b>Installation</b>
 
-At the command prompt, run the following commands:
+Clone the C+R repository on GitHub
+Open a terminal window and type:
 
-	sudo apt-get update
-	sudo apt-get upgrade -y
-	sudo apt-get install python3-dev -y
-	sudo apt-get install build-essential python3-dev -y
-	sudo apt-get install python3-venv -y
-	sudo apt-get install ffmpeg -y
-	sudo apt-get install sox -y
-	
+	git clone https://github.com/realtechsupport/c-plus-r.git
+	Username for 'https://github.com': realtechsupport
+	Password for 'https://realtechsupport@github.com'
+	<enter the access token> 
+
+Cd to the c-plus-r directory and  run the following commands to undate your basic python environment:
+
+	chmod +x basics.sh
+	sh basics.sh
+
 Create a virtual environment:
 
 	python3 -m venv env
@@ -43,13 +46,6 @@ Create a virtual environment:
 Activate the environment:
 
 	source ./env/bin/activate
-
-Clone the C+R repository on GitHub
-
-	git clone https://github.com/realtechsupport/c-plus-r.git
-	Username for 'https://github.com': realtechsupport
-	Password for 'https://realtechsupport@github.com':
-	<enter the access token> 
 
 Install Requirements and Dependencies
 

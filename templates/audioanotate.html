@@ -15,6 +15,10 @@
   <center>
   <i> ... perform steps from top to bottom ...</i>
   <br><br>
+  <input type=submit name='remove' value='Remove-Voiceover'>
+  &nbsp&nbsp&nbsp
+  <input type=submit name='context' value='Context' onclick='ShowContext(this)'>
+  <br><br>
   <style> input  {width:150px; height: 25px;} </style>
   <form method="POST" enctype="multipart/form-data">
   <td>{{ form.vid.label }}</td>
@@ -31,9 +35,10 @@
   function ShowContext(file)
   {
     alert(
-      'Use this module to replace the field audio with a new audio file.'  +
-      '\nThis can be helpful if an expert wants to annoate a field video.' +
-      '\nPick your field video and select the microphone input (see Readme for extra info).' +
+      'Use this module to replace the field audio with a new audio file. '  +
+      'This can be helpful if an expert wants to annoate a field video.' +
+      '\n\n\'remove-voiceover\' will delete old voice-over video and audio assets.' +
+      '\n\nPick your field video and select the microphone input (see Readme for extra info).' +
       '\nThen load the video and set start and end times.' +
       '\nThen segment the video.' +
       '\nWhen that step is complete - it can take several minutes on .mp4 files -  click voiceover and comment on the video with appropriate keywords.' +
@@ -45,11 +50,7 @@
   </script>
 
   <br><br>
-  <input type=submit name='load' value='LoadVideo'>
-  &nbsp&nbsp&nbsp
-  <input type=submit name='context' value='Context' onclick='ShowContext(this)'>
-
-
+  <input type=submit name='load' value='Load-Video'>
   <br><br>
   <td>{{ form.sa_m.label }}</td>
   &nbsp&nbsp&nbsp
@@ -70,7 +71,7 @@
   <td>{{ form.ea_s }}</td>
 
   <br><br>
-  <input type=submit name='segment' value='SegmentVideo'>
+  <input type=submit name='segment' value='Segment-Video'>
   <br><br>
   <input type='button' id="playbutton" value='VoiceOver'>
   <br><br>

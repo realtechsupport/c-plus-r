@@ -12,7 +12,7 @@
 # python3 main.py firefox no-debug OR python3 main.py firefox debug
 
 # issue: can not get flask-caching to work properly
-# solution:  install Cache Killer for Chrome; after install check options (right click, enable at start)
+# solution: Classic Cache Killer for Chrome; after install check options (right click, enable at start)
 #------------------------------------------------------------------------------
 import sys, os, time, shutil, glob
 import eventlet, json
@@ -504,8 +504,8 @@ def testclassifiers():
                 moreresults = 'top three predictions: ' + str(tp_vals)
 
             except:
-                print('... something went wrong... ')
-                exit()
+                print('... display images before you classify and pick an image with left mouse click... ')
+                return redirect(url_for('testclassifiers'))
 
         elif("context" in request.form):
             images = ''

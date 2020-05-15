@@ -76,7 +76,7 @@ Activate the virtual environment:
 
 	python3 main.py browser debug_mode
 
-browser = firefox or chrome; debug_mode = debug or no-debug. 
+browser = firefox or chromium; debug_mode = debug or no-debug. 
 The terminal window will display comments. You should see the launch screen in a browser window.  
 
 

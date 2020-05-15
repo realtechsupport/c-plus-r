@@ -64,7 +64,11 @@ def index():
     locations = ('STATIC', 'ANOTATE', 'TMP', 'IMAGES', 'RESULTS')
     exception = 'voiceover'
 
-    removefiles(app, formats, locations, exception)
+    try:
+        removefiles(app, formats, locations, exception)
+    except:
+        pass
+        
     if not os.path.exists(i_dir):
         os.makedirs(i_dir)
 
@@ -688,7 +692,7 @@ def audioanotate():
         elif("remove" in request.form):
             print('removing old voic-over assets')
             tpatterns = ('*.webm', '*.wav', '*.mp4', '*.MP4', '*.mkv')
-            tlocations = ('STATIC', 'TMP')
+            tlocations = ('STATIC', 'ANOTATE', 'TMP')
             texception = 'nothing'
             try:
                 removefiles(app, tpatterns, tlocations, texception)

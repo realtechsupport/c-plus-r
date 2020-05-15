@@ -13,12 +13,8 @@
 
   <br>
   <center>
-  <i> ... perform steps from top to bottom ...</i>
   <br><br>
-  <input type=submit name='remove' value='Remove-Voiceover'>
-  &nbsp&nbsp&nbsp
-  <input type=submit name='context' value='Context' onclick='ShowContext(this)'>
-  <br><br>
+
   <style> input  {width:150px; height: 25px;} </style>
   <form method="POST" enctype="multipart/form-data">
   <td>{{ form.vid.label }}</td>
@@ -50,8 +46,13 @@
   </script>
 
   <br><br>
+  <input type=submit name='remove' value='Remove-Voiceover'>
+  &nbsp&nbsp&nbsp
   <input type=submit name='load' value='Load-Video'>
+  &nbsp&nbsp&nbsp
+  <input type=submit name='context' value='Context' onclick='ShowContext(this)'>
   <br><br>
+
   <td>{{ form.sa_m.label }}</td>
   &nbsp&nbsp&nbsp
   <td>{{ form.sa_m }}</td>

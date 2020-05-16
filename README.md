@@ -39,6 +39,7 @@ Cd to the c-plus-r directory and  run the following commands to update your pyth
 
 	chmod +x basics.sh
 	sh basics.sh
+	(this script updates your ubuntu installation. It runs sudo, so you will be prompted for your password.)
 
 Create a virtual environment:
 

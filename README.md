@@ -50,7 +50,8 @@ Activate the environment:
 	source ./env/bin/activate
 
 Cd to to the c-plus-r directory again.
-Install Requirements and Dependencies
+Install Requirements and Dependencies. 
+This process may take 30 minutes or so.
 
 	pip3 install -r requirements.txt
 

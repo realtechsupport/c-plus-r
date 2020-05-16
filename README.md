@@ -49,6 +49,7 @@ Activate the environment:
 
 	source ./env/bin/activate
 
+Cd to to the c-plus-r directory again.
 Install Requirements and Dependencies
 
 	pip3 install -r requirements.txt

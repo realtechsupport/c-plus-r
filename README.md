@@ -38,8 +38,8 @@ Open a terminal window and type:
 Cd to the c-plus-r directory and  run the following commands to update your python environment:
 
 	chmod +x basics.sh
-	sh basics.sh
-	(this script updates your ubuntu installation. It runs sudo, so you will be prompted for your password.)
+	sudo sh basics.sh
+	(this script updates your ubuntu installation and requires sudo to do so.)
 
 Create a virtual environment:
 

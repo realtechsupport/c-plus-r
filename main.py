@@ -68,7 +68,7 @@ def index():
         removefiles(app, formats, locations, exception)
     except:
         pass
-        
+
     if not os.path.exists(i_dir):
         os.makedirs(i_dir)
 
@@ -690,7 +690,7 @@ def audioanotate():
             session['s_filename'] = filename
 
         elif("remove" in request.form):
-            print('removing old voic-over assets')
+            print('removing old voice-over assets')
             tpatterns = ('*.webm', '*.wav', '*.mp4', '*.MP4', '*.mkv')
             tlocations = ('STATIC', 'ANOTATE', 'TMP')
             texception = 'nothing'
@@ -698,6 +698,17 @@ def audioanotate():
                 removefiles(app, tpatterns, tlocations, texception)
             except:
                 return redirect(url_for('audioanotate'))
+
+        elif("check" in request.form):
+            print('recording 3 seconds of audio for system check... ')
+            mic = form.mic.data
+            cardn, devicen = mic_info(mic)
+            session['cardn'] = cardn
+            session['devicen'] = devicen
+            dur = 3;
+            output = os.path.join(app.config['TMP'], 'audiocheck.wav')
+            record_and_playback(dur, cardn, devicen, output)
+            return redirect(url_for('audioanotate'))
 
     if (request.method == 'POST'):
         if("segment" in request.form):

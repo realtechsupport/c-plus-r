@@ -231,9 +231,15 @@ def get_segment(videofile, start_cut, end_cut):
 
 #-------------------------------------------------------------------------------
 def voiceover_recording(dur, card, device, output):
-    #command = "ffmpeg -y -f alsa -ac 1 -i -t " + str(dur) + " plughw:" +str(card) + ',' + str(device) + ' ' + output
     command = 'ffmpeg -loglevel panic -y -f alsa -ac 1 -i plughw:' + str(card) + ',' + str(device) + ' -t ' + str(dur) + ' ' +  output
     subprocess.call(command, shell=True)
+
+#-------------------------------------------------------------------------------
+def record_and_playback(dur, card, device, output):
+    command1 = 'ffmpeg -loglevel panic -y -f alsa -ac 1 -i plughw:' + str(card) + ',' + str(device) + ' -t ' + str(dur) + ' ' +  output
+    subprocess.call(command1, shell=True)
+    command2 = "aplay " + output
+    subprocess.call(command2, shell=True)
 
 #-------------------------------------------------------------------------------
 def combine_recordingvideo(audiofile, videofile, output):

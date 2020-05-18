@@ -32,8 +32,10 @@
   {
     alert(
       'Use this module to replace the field audio with a new audio file. '  +
-      'This can be helpful if an expert wants to annoate a field video.' +
-      '\n\n\'remove-voiceover\' will delete old voice-over video and audio assets.' +
+      'This can be helpful in the event an expert wishes to annotate a field video.' +
+      '\n\n\'check-audio\' will record 3 seconds of audio on your selected mic input. ' +
+      'If you do not hear this sample, something is amiss with either your mic, mic selection or speakers. ' +
+      '\n\n\'remove-old-voiceover\' will delete old voice-over video and audio assets.' +
       '\n\nPick your field video and select the microphone input (see Readme for extra info).' +
       '\nThen load the video and set start and end times.' +
       '\nThen segment the video.' +
@@ -46,8 +48,10 @@
   </script>
 
   <br><br>
-  <input type=submit name='remove' value='Remove-Voiceover'>
+  <input type=submit name='check' value='Check-Audio'>
   &nbsp&nbsp&nbsp
+  <input type=submit name='remove' value='Remove-Old-Voiceover'>
+  <br><br>
   <input type=submit name='load' value='Load-Video'>
   &nbsp&nbsp&nbsp
   <input type=submit name='context' value='Context' onclick='ShowContext(this)'>

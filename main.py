@@ -332,8 +332,13 @@ def checkimagesview():
 
         elif("archive" in request.form):
             #shutil.make_archive(app.config['COLLECTION'], 'zip', app.config['COLLECTION'])... works from commandline...
-            zfile = 'collection.zip'
-            zipit(app.config['COLLECTION'], zfile)
+            zfile = 'collection.zip'; timezone = 'America/New_York'
+            stamped_zfile = create_timestamp(zfile, timezone)
+            zipit(app.config['COLLECTION'], stamped_zfile)
+            source = os.path.join(app.config['COLLECTION'], stamped_zfile)
+            destination = os.path.join(app.config['ARCHIVE'], stamped_zfile)
+            shutil.move(source, destination)
+
 
         elif("context" in request.form):
             pass

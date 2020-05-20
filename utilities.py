@@ -21,6 +21,16 @@ import contextlib
 import numpy as np
 import math
 from random import *
+from datetime import datetime
+import pytz
+
+#-------------------------------------------------------------------------------
+def create_timestamp(item, location):
+    tz = pytz.timezone(location)
+    now = datetime.now(tz)
+    current_time = now.strftime("%d-%m-%Y-%H-%M")
+    stamp_item =  current_time + '_' + item
+    return(stamp_item)
 
 #------------------------------------------------------------------------------
 def zipit(path, zfile):

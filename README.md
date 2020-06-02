@@ -21,12 +21,27 @@ Cite this project as: Catch&Release version1
 
 <b>Context</b>
 
-C+R runs on Linux under Python3 and Flask with Chromium or Firefox. C+R uses the PyTorch framework to train and test image classifiers and connects to the Google Speech API (free) for speech processing. Library versions and dependencies are given in the requirements file. 
-C+R has been tested on a desktop (i7-4770 CPU with 16GB of memory) and a laptop (i7-3667 CPU with 8GB of memory) with Ubuntu 18.04 TLS under kernels 5.2.8 and 5.3.0 with images sourced from .mp4 and .webm video (HD [1920 x 1080] at 30f/s; .mp4  H.264 encoded) from multiple (android OS) mobile phones and GoPro Hero 6 action cameras.
+C+R runs on Linux and Mac OS under Python3 and Flask with Chromium or Firefox.
 
-Recommended browser: Chromium. 
+C+R uses the PyTorch framework to train and test image classifiers and connects to the Google Speech API (free) for speech processing. Library versions and dependencies are given in the requirements file.
+C+R has been tested on a desktop (i7-4770 CPU with 16GB of memory) and a laptop (i7-3667 CPU with 8GB of memory) under Ubuntu (18.04 TLS under kernels 5.2.8 and 5.3.0 ) and under Mac OS (Catalina) with images
+sourced from .mp4 and .webm video (HD [1920 x 1080] at 30f/s; .mp4 H.264 encoded) from multiple (android
+OS) mobile phones and GoPro Hero 6 action cameras.
+
+Recommended browser: Chromium.
+
+Install Chromium on Ubuntu:
+
+	sudo apt install -y chromium-browser
+
+Install Chromium on Mac OS:
+
+	https://apple.stackexchange.com/questions/78805/chromium-builds-for-mac-os-x/215426#215426
+	(Currently recommended method)
+
 Install the free Classic Cache Killer:
-https://chrome.google.com/webstore/detail/classic-cache-killer/kkmknnnjliniefekpicbaaobdnjjikfp?hl=en 
+
+	https://chrome.google.com/webstore/detail/classic-cache-killer/kkmknnnjliniefekpicbaaobdnjjikfp?hl=en 
 
 
 <b>Installation</b>
@@ -80,11 +95,11 @@ Activate the virtual environment:
 
 <b>Start</b>   
 
+	python3 main.py ubuntu chromium no-debug
 
-	python3 main.py browser debug_mode
-
-browser = firefox or chromium; debug_mode = debug or no-debug. 
-The terminal window will display comments. You should see the launch screen in a browser window.  
+Specify all three items: OS, browser and debug mode. Supported OS: Ubuntu and Mac OS. 
+Supported browsers:
+Chromium and Firefox (less stable). To run in debug mode replace’ no-debug’ with ‘debug’.  
 
 
 <b>Stop</b>

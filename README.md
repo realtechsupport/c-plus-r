@@ -79,13 +79,16 @@ Generate an STT key (optional)
 
 While there are multiple providers of Speech to Text services, the most effective offering with the widest range of languages is at this moment provided by Google. If you want to make use of the text from video extraction you should obtain an access key to the Google Speech API. Creation of this key is free of charge and you can use it in this software at no cost as C+R operates within free limits of the API. However, you do require a google account in order to create the key. If that is not palatable, skip the sections that make use of the Speech API.
 
-Instructions to generate a key:
+Instructions to generate a key (https://cloud.google.com/text-to-speech/docs/quickstart-protocol):
 
-    1. Navigate to the APIs & Services->Credentials panel in Cloud Platform Console.
-    2. Select Create credentials, then select API key from the dropdown menu.
-    3. Click the Create button. ... 
-    4. Once you have the API key, download it and create a JSON file.
-    5. Save to the C+R project
+    1. In the Cloud Console, go to the Create service account key page.
+    2. From the Service account list, select New service account.
+    3. In the Service account name field, enter a name.
+    4. Don't select a value from the Role list. No role is required to access this service.
+    5. Click Create. 
+    6. Click Create without role. A JSON file that contains your key downloads to your computer.
+    7. Save the JSON file to the C+R project.
+
 
 <b>Launch</b>
 

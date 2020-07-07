@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% block content %}
+<title>prepareview.html</title>
+
+  <center>
+  <h2>prepare field videos or get some sample data</h2>
+  </center>
+<!------------------------------------------------------------------------->
+
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<!---
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <script>
+      $(document).ready(function()
+      {
+        setTimeout(function() {$('#info').fadeOut('fast');}, 3000);
+      });
+    </script>
+---->
+    <script>
+    function ShowContext(file)
+    {
+    alert(
+    'Preprocess field videos or get some sample data for experiments.'+
+    '\n\nIf your field video is long, chunk it into smaller segments.' +
+    'Supported formats: .webm and .mp4 .' +
+    'Segments of 10 minutes or so are ok for viewing and bulk labeling.' +
+    'If your field videos are .mp4, smaller files are better - 3min or less.' +
+    'Segments of about 3 minutes are suggested for text processing and audio labeling.' +
+    '\n\nChunked segments are in the tmp directory.' +
+    '\n\nProceed to \' text from video\' or \'video annotation\' to process the chunks. ' +
+    '\'Back to start\' will delete these temporary files.'
+
+    );
+    }
+    </script>
+<!------------------------------------------------------------------------->
+
+<style> input  {width:150px; height: 25px;} </style>
+<br><br>
+
+<center>
+
+<form method="POST" enctype="multipart/form-data">
+<table>
+<br><br>
+  {% for field in form if field.widget.input_type != 'hidden' %}
+    <tr>
+      <td>{{ field }}</td>
+      <td>{{ field.label }}</td>
+    </tr>
+  {% endfor %}
+</table>
+
+<br>
+<input type=submit name='chunk' value='ChunkVideo'>
+&nbsp&nbsp&nbsp&nbsp
+<input type=submit name='context' value='Context' onclick='ShowContext(this)'>
+
+<br><br>
+<fieldset>
+  <legend>chunked files in tmp directory</legend>
+    <p>
+      <div class='form-text'
+        <textarea rows="50" cols="75" placeholder = "out...">
+         {{result}}
+       </textarea>
+     </div>
+    </p>
+</fieldset>
+<br><br>
+
+
+<input type=submit name='samples' value='GetSamples'>
+<br><br>
+
+<style> a:link{background-color: #DCDCDC; padding-bottom: 6px; padding-top: 6px; padding-right: 10px; padding-left: 10px; text-align: center; text-decoration: none; display: inline-block; } </style>
+<a href="{{ url_for('inputview') }}"> continue to text from video </a>
+&nbsp&nbsp&nbsp&nbsp
+<style> a:link{background-color: #DCDCDC; padding-bottom: 6px; padding-top: 6px; padding-right: 10px; padding-left: 10px; text-align: center; text-decoration: none; display: inline-block; } </style>
+<a href="{{ url_for('audioanotate') }}"> continue to video annotation </a>
+<br><br>
+<style> a:link{background-color: #FFFFFF; padding-bottom: 6px; padding-top: 6px; padding-right: 10px; padding-left: 10px; text-align: center; text-decoration: none; display: inline-block; } </style>
+<a href="{{ url_for('index') }}"> back to start </a>
+
+</center>
+</form>
+
+{% endblock %}
+
+</body>
+</html>
+
+<!----------------------------------------------------------------------------->

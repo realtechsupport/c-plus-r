@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+{% block content %}
+<title>index.html</title>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+
+<script>
+  $(document).ready(function()
+  {
+    setTimeout(function() {$('#info').fadeOut('fast');}, 1000);
+  });
+</script>
+<!----------------------------------------------------------------------------->
+
+</head>
+
+<body>
+
+  <center>
+  <br><br><br>
+
+  ... general procedures for field video processing ...
+
+  <h2>
+  <style> a:link{background-color: #FFFFFF; color: #808080;  padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; } </style>
+
+  <a href="{{ url_for('prepareview') }}">prepare field videos or download sample data</a>
+  <br>
+  <a href="{{ url_for('inputview') }}">capture text from field video</a>
+  <br>
+  <a href="{{ url_for('audioanotate') }}">add voice-over to field video</a>
+  <br>
+  <a href="{{ url_for('labelimagesview') }}">label images from field video</a>
+  </h2>
+
+  <br><br>
+  ... image classification with the bali-26 dataset ...
+  <br>
+
+  <h2>
+  <a href="{{ url_for('trainclassifiers') }}">train an image classifier</a>
+  <br>
+  <a href="{{ url_for('testclassifiers') }}">evaluate an image classifier</a>
+  </h2>
+
+  <br><br>
+  <a href="{{ url_for('showinfoview') }}">project information</a>
+
+<!----------------------------------------------------------------------------->
+
+  <br><br>
+  <div id="info" style="text-align:center; width:100%">
+      <FONT color="green">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+          {% for message in messages %}
+          <i> {{ message }} </i>
+          {% endfor %}
+        {% endif %}
+        {% endwith %}
+      </font>
+  </div>
+
+{% endblock %}
+
+</body>
+</html>

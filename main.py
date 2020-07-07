@@ -800,14 +800,22 @@ if __name__ == '__main__':
     if(len(sys.argv) < 3):
         print('\nplease provide OS, browser and dubug choice when you start the program.')
         print('\'python3 main.py ubuntu firefox debug\', or \'python3 main.py mac chromium no-debug\' for example.\n')
+<<<<<<< HEAD
         print('OS: Ubuntu or MAC. Ubuntu browsers: chromium or firefox; MAC only chrome: \'python3 main.py mac chrome no-debug\' \n')
+=======
+        print('OS: ubuntu or mac. Browsers: chromium or firefox.\n')
+>>>>>>> a52f369e2850664d0576379b67aa3e9f488487f0
         sys.exit(2)
     else:
         try:
             osy = sys.argv[1]
             browser = sys.argv[2]
             debug_mode = sys.argv[3]
+<<<<<<< HEAD
             print('\n> operating system: ', osy)
+=======
+            print('\n > operating system: ', osy)
+>>>>>>> a52f369e2850664d0576379b67aa3e9f488487f0
             print('> browser: ', browser)
             print('> mode: ', debug_mode)
         except:
@@ -818,8 +826,11 @@ if __name__ == '__main__':
 
     port = 5000
     url = "http://127.0.0.1:{0}".format(port)
+<<<<<<< HEAD
 
     #Two browsers supported in ubuntu; only one (Chrome) in MAC OS
+=======
+>>>>>>> a52f369e2850664d0576379b67aa3e9f488487f0
     if('firefox' in browser):
         browser = 'firefox'
     else:
@@ -829,8 +840,12 @@ if __name__ == '__main__':
     if('ubuntu' in osy):
         threading.Timer(1.25, lambda: webbrowser.get(browser).open(url) ).start()
     else:
+<<<<<<< HEAD
         #launch Chrome on MAC OS
         threading.Timer(1.25, lambda: webbrowser.get('open -a /Applications/Google\ Chrome.app %s').open(url)).start()
+=======
+        threading.Timer(1.25, lambda: webbrowser.get('open -a /Applications/Chromium.app %s').open(url)).start()
+>>>>>>> a52f369e2850664d0576379b67aa3e9f488487f0
 
     if(debug_mode == 'debug'):
         socketio.run(app, port=port, debug=True)

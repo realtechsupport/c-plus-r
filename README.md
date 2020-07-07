@@ -107,4 +107,4 @@ Stop the app from the terminal: ctrl-c
 <br>
 Exit environment at the terminal: ctrl-d
 
-<i>Check the README.pdf file in the repository for a detailed description on how to use the modules in C+R.</i>
+<i>Check the README.pdf file in the repository for a detailed description on how to use the modules in C&R.</i>

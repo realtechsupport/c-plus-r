@@ -1,0 +1,3 @@
+# Ignore all files with these extensions
+*.pyc
+*.zip

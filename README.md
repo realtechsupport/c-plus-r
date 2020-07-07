@@ -24,20 +24,14 @@ Cite this project as: Catch&Release version1
 C+R runs on Linux and Mac OS under Python3 and Flask with Chromium or Firefox.
 
 C+R uses the PyTorch framework to train and test image classifiers and connects to the Google Speech API (free) for speech processing. Library versions and dependencies are given in the requirements file.
-C+R has been tested on a desktop (i7-4770 CPU with 16GB of memory) and a laptop (i7-3667 CPU with 8GB of memory) under Ubuntu (18.04 TLS under kernels 5.2.8 and 5.3.0 ) and under Mac OS (Catalina) with images
-sourced from .mp4 and .webm video (HD [1920 x 1080] at 30f/s; .mp4 H.264 encoded) from multiple (android
+C+R has been tested on a desktop (i7-4770 CPU with 16GB of memory) and a laptop (i7-3667 CPU with 8GB of memory) under Ubuntu (18.04 TLS under kernels 5.2.8 and 5.3.0 ) and under Mac OS (Catalina) with images sourced from .mp4 and .webm video (HD [1920 x 1080] at 30f/s; .mp4 H.264 encoded) from multiple (android
 OS) mobile phones and GoPro Hero 6 action cameras.
 
-Recommended browser: Chromium.
+Recommended browser: Chromium on Ubuntu, Chrome on MAC.
 
 Install Chromium on Ubuntu:
 
 	sudo apt install -y chromium-browser
-
-Install Chromium on Mac OS:
-
-	https://apple.stackexchange.com/questions/78805/chromium-builds-for-mac-os-x/215426#215426
-	(Currently recommended method)
 
 Install the free Classic Cache Killer:
 
@@ -98,11 +92,13 @@ Activate the virtual environment:
 
 <b>Start</b>   
 
-	python3 main.py ubuntu chromium no-debug
+Start C+R (in the c-plus-r directory):
 
-Specify all three items: OS, browser and debug mode. Supported OS: Ubuntu and Mac OS. 
-Supported browsers:
-Chromium and Firefox (less stable). To run in debug mode replace’ no-debug’ with ‘debug’.  
+	python3 main.py ubuntu chromium no-debug
+	python3 main.py mac chrome no-debug
+	
+Specify all three items: OS, browser and debug mode. Supported OS: Ubuntu and Mac OS. Supported browsers on Ubuntu:
+Chromium and Firefox (less stable). To run in debug mode replace’ no-debug’ with ‘debug’.
 
 
 <b>Stop</b>

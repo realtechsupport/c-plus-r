@@ -2,7 +2,7 @@
 
 <b>Introduction</b>
 
-Catch & Release (C&R) is a collection of procedures that allow one to apply machine learning classification onto field videos. C&R’s goal is to facilitate the creation of under-represented knowledge in machine learning in general, and experimental datasets for neural network image classification in particular. C&R allows anyone with a mobile phone to create viable datasets for image classification and to train state of the art convolutional neural networks with these datasets.
+Catch & Release (C&R) is a collection of procedures that allow one to apply machine learning classification onto field videos. C&R’s goal is to facilitate the creation of under-represented knowledge in machine learning in general, and experimental datasets for neural network image classification in particular. C&R allows anyone with a mobile phone and a laptop to create viable datasets for image classification and to train state of the art convolutional neural networks with these datasets.
 
 Furthermore, C&R can extract text from video. It can extract labels from video and use them as labels to generate
 image categories associated with the utterance.

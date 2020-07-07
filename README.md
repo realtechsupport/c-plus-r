@@ -94,11 +94,11 @@ Activate the virtual environment:
 
 Start C+R (in the c-plus-r directory):
 
-	python3 main.py ubuntu chromium no-debug
-	python3 main.py mac chrome no-debug
+	on ubuntu: 	python3 main.py ubuntu chromium no-debug
+	on mac: 	python3 main.py mac chrome no-debug
 	
 Specify all three items: OS, browser and debug mode. Supported OS: Ubuntu and Mac OS. Supported browsers on Ubuntu:
-Chromium and Firefox (less stable). To run in debug mode replace’ no-debug’ with ‘debug’.
+Chromium and Firefox (less stable). To run in debug mode replace ’no-debug’ with ‘debug’.
 
 
 <b>Stop</b>

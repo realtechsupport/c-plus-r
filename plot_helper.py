@@ -1,9 +1,5 @@
 # plot_helper.py (python3)
-<<<<<<< HEAD
-# utilities for graphic display of training and evaluation results
-=======
 # utilities for graphic display of training and evaluation of CNNs
->>>>>>> a52f369e2850664d0576379b67aa3e9f488487f0
 # experiments in knowledge documentation; with an application to AI for ethnobotany
 # March 2020
 #-------------------------------------------------------------------------------

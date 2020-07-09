@@ -23,15 +23,17 @@
 function ShowContext(file)
 {
 alert(
-'Two networks available: a simple (vanilla) CNN and the Alexnet architecture.' +
-'\nPretrained option is not available for the vanilla network.' +
-'\nSample sets from the bali-26 collection are available here:' +
+'The first time you use this module, the selected test data will be downloaded. Patience.' +
+'\nTwo networks are curently available: a simple (vanilla) CNN and the Alexnet architecture.' +
+'\nThe pretrained option is not available for the vanilla network.' +
+'\nSee the good and bad of ImageNet pretraining in this test case. ' +
+'\nSample sets from the bali-26 collection are available:' +
 '\nbali-3: caco, passiflora and aroid, bali-3B: nilam, sawo and snakefruit, bali-3C: durian, nilam and snakefruit..' +
-'\nUnless you have a gpu enabled computer, training on your home device is a slow process (55 min for 20 epochs on alexanet).' +
+'\n\nUnless you have a gpu enabled computer, training on your home device is a slow process (55 min for 20 epochs on alexanet).' +
 '\nYou can follow the training steps in the terminal window.' +
 '\nReduced epochs and fewer images per category shorten the training time but compromise accuracy.' +
-'\n\nPrevent page update snafus with Cache Killer for Chrome.' +
-'\nLarge imagesets with deeper networks should be copied to a remote server...see Readme for details.'
+'\nLarge imagesets with deeper networks should be copied to a remote server...see Readme for details.' +
+'\nJust in case - Prevent page update snafus by installing Cache Killer for Chrome (if you have not already done so).'
 );
 }
 </script>

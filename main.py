@@ -484,9 +484,9 @@ def testclassifiers():
                 elif('Resnext50'.lower() in classifier):
                     archive = bali26_rexnext50
                 elif('Alexnet'.lower() in classifier):
-                    archive = bali16_alexnet
+                    archive = bali26_alexnet
                 else:
-                    archive = bali16_alexnet
+                    archive = bali26_alexnet
 
                 path, dirs, files = next(os.walk(app.config['MODELS']))
                 if(classifier in files):

@@ -33,16 +33,17 @@
     alert(
       'Use this module to replace the field audio with a new audio file. '  +
       'This can be helpful in the event an expert wishes to annotate a field video.' +
+      '\nAudio on linux can be tricky - see Readme for details and troubleshooting... ' +
       '\n\n\'check-audio\' will record 3 seconds of audio on your selected mic input. ' +
       'If you do not hear this sample, something is amiss with either your mic, mic selection or speakers. ' +
       '\n\n\'remove-old-voiceover\' will delete old voice-over video and audio assets.' +
-      '\n\nPick your field video and select the microphone input (see Readme for extra info).' +
+      '\n\nPick your field video and select the microphone input (see Readme on how to add a microphone input).' +
       '\nThen load the video and set start and end times.' +
       '\nThen segment the video.' +
-      '\nWhen that step is complete - it can take several minutes on .mp4 files -  click voiceover and comment on the video with appropriate keywords.' +
-      '\nTurn off your speakers during the voiceover recording.' +
-      '\nWhen you finished the voiceover (no longer than the segmented video), go back to start.' +
-      '\n\nThe voiceover video will be stored in the \'anotate\' folder and ready for image labeling.'
+      '\nWhen that step is complete - it can take several minutes on .mp4 files - ensure the correct microphone is selected and turn off the speakers. ' +
+      '\n\nClick voiceover and comment on the video with appropriate keywords.' +
+      '\nWhen you finished the voiceover (no longer than the segmented video), go to \'label images\' or back to start.' +
+      '\n\nThe annotated video will be stored in the \'anotate\' folder (with the prefix \'voiceover\').'
       );
   }
   </script>
@@ -81,6 +82,9 @@
   <input type='button' id="playbutton" value='VoiceOver'>
   <br><br>
   <style> a:link{background-color: #FFFFFF; padding-bottom: 6px; padding-top: 6px; padding-right: 10px; padding-left: 10px; text-align: center; text-decoration: none; display: inline-block; } </style>
+
+  <a href="{{ url_for('labelimagesview') }}"> label images from video </a>
+  &nbsp&nbsp&nbsp
   <a href="{{ url_for('index') }}"> back to start</a>
   </center>
 <!----------------------------------------------------------------------------->

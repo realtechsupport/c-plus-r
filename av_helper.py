@@ -63,16 +63,20 @@ def seconds_to_hms(t):
     return (hms)
 #-------------------------------------------------------------------------------
 def mic_info(mic):
+
+    print('this is the chosen mic:', mic)
     if(mic == 'default'):
         cardn = 0
         devicen = 0
     else:
         try:
-            command = 'arecord -l | grep ' + mic
+            command = 'arecord -l | grep ' + "'" + mic + "'"
             result = (subprocess.check_output(command, shell=True)).decode('utf-8')
-            cpos = result.find('card'); dpos = result.find('device')
-            devicen = result[(len('device')) + dpos + 1]; cardn = result[(len('card')) + cpos + 1]
-
+            #print('got this: ', result)
+            cpos = result.find('card');
+            dpos = result.find('device')
+            devicen = result[(len('device')) + dpos + 1];
+            cardn = result[(len('card')) + cpos + 1]
         except:
             cardn = 0
             devicen = 0

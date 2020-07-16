@@ -539,81 +539,6 @@ def classify_image(filename):
     return send_from_directory(location, filename)
 
 #-------------------------------------------------------------------------------
-@app.route('/trainclassifiers', methods=['GET', 'POST'])
-def trainclassifiers():
-    form = MakeClassifiers()
-    ti = ''; ei = ''
-    template = 'trainclassifiers.html'
-
-    if (request.method == 'POST'):
-        if("train" in request.form):
-            network = form.classifier.data; testcollection = form.testcollection.data
-            epochs = form.epochs.data; gamma = form.gamma.data; lr = form.learning_rate.data
-            momentum = form.momentum.data; max_images = form.max_images.data
-            training_percentage = form.training_percentage.data;
-            pretrained = form.pretrained.data; normalization = form.normalization.data;
-
-            try:
-                print('deleting the existing collection...')
-                shutil.rmtree(os.path.join(app.config['FIND'], testcollection))
-            except:
-                pass
-
-            if(testcollection == 'bali-3'):
-                archive = bali3_zip
-            elif(testcollection == 'bali-3B'):
-                archive = bali3B_zip
-            elif(testcollection == 'bali-3C'):
-                archive = bali3C_zip
-            elif(testcollection == 'bali-3D'):
-                archive = bali3D_zip
-            else:
-                archive = bali3_zip
-
-            lzfile = testcollection + '.zip'
-            path, dirs, files = next(os.walk(app.config['FIND']))
-            zfile = os.path.join(app.config['FIND'], testcollection) + '.zip'
-
-            if(lzfile in files):
-                print('already downloaded the archive..')
-                pass
-            else:
-                try:
-                    print('getting the test collection...')
-                    wget.download(archive, zfile)
-                except:
-                    print('can not get the test collection...exiting')
-                    exit()
-
-            shutil.unpack_archive(zfile, app.config['FIND'], 'zip')
-            path, categories, files = next(os.walk(os.path.join(app.config['FIND'], testcollection)))
-
-            if(network == 'vanillanet'):
-                model = vanillanet(len(categories))
-                pretrained = False
-            else:
-                model = models.alexnet(pretrained=pretrained)
-                model.classifier[6] = torch.nn.Linear(4096,len(categories))
-
-            cn = network + '_' + testcollection + '_checkpoint.pth'
-            checkpointname = os.path.join(app.config['RESULTS'], cn)
-            ti = network + '_' + testcollection + '_training.jpg'
-            ei = network + '_' + testcollection + '_errors.jpg'
-            training_image = os.path.join(app.config['RESULTS'], ti)
-            datapath = os.path.join(app.config['FIND'], testcollection) + '/'
-
-            print('\nstarting the training with: ', network, testcollection)
-            plots = train_model(app, checkpointname, network, testcollection, model, categories, datapath, epochs, gamma, lr, momentum, max_images,\
-             training_percentage, pretrained, training_image, normalization)
-
-            tplot = os.path.join(app.config['STATIC'], ti)
-            eplot = os.path.join(app.config['STATIC'], ei)
-            copyfile(plots[0], tplot)
-            copyfile(plots[1], eplot)
-
-    return render_template(template, form=form, image1=ti, image2=ei)
-
-#-------------------------------------------------------------------------------
 @app.route('/showinfoview')
 def showinfoview():
     template = 'showinfoview.html'
@@ -691,6 +616,7 @@ def audioanotate():
                 return redirect(url_for('audioanotate'))
 
             cardn, devicen = mic_info(mic)
+            print('mic info: ', cardn, devicen)
             session['cardn'] = cardn
             session['devicen'] = devicen
             session['s_filename'] = filename

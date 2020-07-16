@@ -10,7 +10,7 @@ image categories associated with the utterance.
 This software and the bali-26 dataset are the basis for the ‘Return to Bali’ project that explores machine learning to support the representation of ethnobotanical knowledge and practices in Central Bali.
 http://www.realtechsupport.org/new_works/return2bali.html 
 
-C&R can help  create machine learning datasets or can serve as a companion while studying convolutional neural network systems. If you would like to contribute toward building a viable alternative to ImageNet for machine learning training, contact the repository owner (marcbohlen@protonmail.com).
+C&R can help  create machine learning datasets or can serve as a companion while studying convolutional neural network systems. If you would like to contribute toward building a rich dataset for machine learning training, contact the repository owner (marcbohlen@protonmail.com).
 
 
 <b>License</b>
@@ -87,7 +87,7 @@ Activate the virtual environment:
 
 	source ./env/bin/activate
 
-<b>Start</b>   
+<b>Start</b>
 
 Start C+R (in the c-plus-r directory):
 

@@ -222,17 +222,30 @@ def checkimagesview():
     category = ''
     dfiles = ''
     key = ''
+    wordcollection = []
+    images = ''
     template = 'checkimagesview.html'
 
     key = session.get('s_key', None)
+    wordcollection = session.get('s_wordcollection', None)
     videoname = session.get('s_videoname', None)
     current_video = videoname.split('/')[-1]
     category = session.get('s_category', None)
+
+    if(len(wordcollection) == 0):
+        print('\n\nNO MATHCES ... try again\n\n')
+        return render_template(template, form=form, category = key, videoname = current_video, images = images)
+
+    #use the first of the actually detected words when there are more than one
+    if(key != ''):
+        if(len(wordcollection) > 0):
+            key = wordcollection[0]
 
     if(key == ''):
         images = os.listdir(app.config['IMAGES'] + category)
     else:
         images = os.listdir(app.config['IMAGES'] + key)
+
 
     lastentry_d = 0; firstentry_s = 0
 
@@ -365,6 +378,17 @@ def checkimagesview():
 def send_image(filename):
     category = session.get('s_category', None)
     key = session.get('s_key', None)
+    wordcollection = []
+
+    #------------new
+    wordcollection = session.get('s_wordcollection', None)
+    print('HERE wordcollection: ', wordcollection)
+    #use the first of the detected words, when there are more than one
+    if(key != ''):
+        if(len(wordcollection) > 0):
+            key = wordcollection[0]
+    print('Revised key: ', key)
+
     if(key == ''):
         location = 'images/' + category
     else:
@@ -381,6 +405,7 @@ def labelimagesview():
     file = ''
     category = ''
     key = ''
+    wordcollection = []
     template = 'labelimagesview.html'
 
     if (request.method == 'POST'):
@@ -424,12 +449,13 @@ def labelimagesview():
             nimages = form.nimages.data
             tconfidence = form.conf.data
             maxattempts = 5
-            label_images(app, videonamepath, language, authsource, key, maxattempts, nimages, tconfidence)
+            wordcollection = label_images(app, videonamepath, language, authsource, key, maxattempts, nimages, tconfidence)
             print('FINISHED labelling by keys')
 
     session['s_videoname'] = videoname
     session['s_category'] = category
     session['s_key'] = key
+    session['s_wordcollection'] = wordcollection
 
     return render_template(template, form=form, showvideo=videoname)
 
@@ -746,7 +772,7 @@ if __name__ == '__main__':
     port = 5000
     url = "http://127.0.0.1:{0}".format(port)
 
-    #Two browsers supported in ubuntu; only one (Chrome) in MAC OS
+    #Two browsers supported in ubuntu; only one (Chrome) in macOS
     if('firefox' in browser):
         browser = 'firefox'
     else:
@@ -756,9 +782,9 @@ if __name__ == '__main__':
     if('ubuntu' in osy):
         threading.Timer(1.25, lambda: webbrowser.get(browser).open(url) ).start()
     else:
-        #launch Chrome on MAC OS
+        #launch Chrome on macOS
         threading.Timer(1.25, lambda: webbrowser.get('open -a /Applications/Google\ Chrome.app %s').open(url)).start()
-        #if install, also Chromium
+        #Chromium, if installed...
         #threading.Timer(1.25, lambda: webbrowser.get('open -a /Applications/Chromium.app %s').open(url)).start()
 
     if(debug_mode == 'debug'):

@@ -49,6 +49,15 @@ def get_video_resolution(filename):
     resolution = info[0].decode('utf-8')
     resolution = re.findall("(\d+x\d+)", resolution)
     resolution = resolution[-1]
+    #print('\nV1 resolution: ', resolution)
+    rotation_info = subprocess.run(['ffprobe', '-loglevel', 'error', '-select_streams', 'v:0', '-show_entries', 'stream_tags=rotate', '-of', 'default=nw=1:nk=1', '-i', filename],
+    stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+    rotation =  rotation_info.stdout.decode('utf-8').strip('\n')
+    if(int(rotation) == 90):
+        res_parts = resolution.split('x')
+        resolution = res_parts[-1] + 'x' + res_parts[0]
+
+    #print('\nV2 resolution: ', resolution)
     return (resolution)
 #------------------------------------------------------------------------------
 def hms_to_seconds(t):

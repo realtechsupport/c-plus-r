@@ -53,6 +53,8 @@ def transcribe_file_with_word_time_offsets(app, audiofile_1ch, videonamepath, ke
     from google.cloud.speech import types
     client = speech.SpeechClient()
 
+    wordcollection = []
+
     # local variables to transcribe_file_with_word_time_offsets
     start_t = " -ss 00:00:"                                 #start of video stream
     dur = " -t 1.0"                                         # 1 second duration after detection of utterance ...
@@ -60,7 +62,7 @@ def transcribe_file_with_word_time_offsets(app, audiofile_1ch, videonamepath, ke
     end_set = " -f image2 "
     nums =  "%d.jpg"
     av_call = "avconv -loglevel panic -i "
-    v_resolution = get_video_resolution(videonamepath)      #set in UI
+    v_resolution = get_video_resolution(videonamepath)      #set in UI; updated to address portrait vs landscape mode
     scale = " -s " + v_resolution
     keyphrases = [{"phrases":key}]
 
@@ -124,6 +126,7 @@ def transcribe_file_with_word_time_offsets(app, audiofile_1ch, videonamepath, ke
                     #print(word + ', ' + str(start_time.seconds + start_time.nanos * 1e-9) + ', ' + str(end_time.seconds + end_time.nanos * 1e-9) + '\n')
                     if(selectit):
                         print(' > saving images labeled as: ', word)
+                        wordcollection.append(word)
                         dir_t = os.path.join(app.config['IMAGES'], word)
                         if not os.path.exists(dir_t):
                             os.makedirs(dir_t)
@@ -135,7 +138,16 @@ def transcribe_file_with_word_time_offsets(app, audiofile_1ch, videonamepath, ke
             else:
                 print('result below confidence threshold... disregarding')
 
-        rename_all(dir_t, offset=0)
+        #rename_all(dir_t, offset=0)
 
     except:
         pass
+
+    #remove duplicates
+    wordcollection = list(dict.fromkeys(wordcollection))
+    #rename
+    for word in wordcollection:
+        dir_t = os.path.join(app.config['IMAGES'], word)
+        rename_all(dir_t, offset=0)
+
+    return(wordcollection)

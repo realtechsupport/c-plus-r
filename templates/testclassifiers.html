@@ -41,7 +41,7 @@
         '\nLeft click to select an image.' +
         '\nThen click \'classify image\' to load the neural net and perform the evaluation. ' +
         '\nThree neural network architectures, pre-trained and not pretrained, are available. See Readme for details. ' +
-        '\n\n The selected model will be downloaded to your local drive and saved . ' +
+        '\n\nThe selected model will be downloaded to your local drive and saved . ' +
         ' Reload the image set if it does not appear, select an image and classify. '
 
         );
@@ -72,8 +72,6 @@
   &nbsp&nbsp&nbsp&nbsp
  <input type=submit name='context' value='Context' onclick='ShowContext(this)'>
  <br><br>
- <a href="{{ url_for('index') }}"> back to start  </a>
- <br><br>
 
   <fieldset>
     <legend>classification results</legend>
@@ -92,6 +90,9 @@
      </p>
   </fieldset>
 
+  <br>
+  <a href="{{ url_for('index') }}"> back to start  </a>
+  <br>
  </center>
 
 <hr>

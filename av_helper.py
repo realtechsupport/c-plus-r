@@ -53,7 +53,8 @@ def get_video_resolution(filename):
     rotation_info = subprocess.run(['ffprobe', '-loglevel', 'error', '-select_streams', 'v:0', '-show_entries', 'stream_tags=rotate', '-of', 'default=nw=1:nk=1', '-i', filename],
     stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
     rotation =  rotation_info.stdout.decode('utf-8').strip('\n')
-    if(int(rotation) == 90):
+
+    if((len(rotation) != 0) and (int(rotation) == 90)):
         res_parts = resolution.split('x')
         resolution = res_parts[-1] + 'x' + res_parts[0]
 
@@ -204,7 +205,8 @@ def chunk_large_videofile(video, chunksize, location):
     seg = seconds_to_hms((chunksize*60))
     name = video.split('.')[0]
     format = video.split('.')[1]
-    command = 'ffmpeg -y -i ' + video + ' -c copy -map 0 -segment_time ' + seg + ' -f segment -reset_timestamps 1 ' + name + '_' + '%02d.' + format
+    #command = 'ffmpeg -y -i ' + video + ' -c copy -map 0 -segment_time ' + seg + ' -f segment -reset_timestamps 1 ' + name + '_' + '%02d.' + format
+    command = 'ffmpeg -loglevel panic -y -i ' + video + ' -c copy -map 0 -segment_time ' + seg + ' -f segment -reset_timestamps 1 ' + name + '_' + '%02d.' + format
     subprocess.call(command, shell=True)
     path, dirs, files = next(os.walk(location))
     #one file is the orginal

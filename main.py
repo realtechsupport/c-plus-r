@@ -203,7 +203,7 @@ def outputview():
     s_filename = session.get('s_filename', None)
 
     if (request.method == 'POST'):
-        print('inside the download option..')
+        print('downloading s2tlog results..')
         template = 'index.html'
         if("download" in request.form):
             resultspath = os.path.join(current_app.root_path, app.config['TMP'])
@@ -232,7 +232,7 @@ def checkimagesview():
     current_video = videoname.split('/')[-1]
     category = session.get('s_category', None)
 
-    if(len(wordcollection) == 0):
+    if((len(wordcollection) == 0) and (category == '')):
         print('\n\nNO MATHCES ... try again\n\n')
         return render_template(template, form=form, category = key, videoname = current_video, images = images)
 
@@ -380,15 +380,13 @@ def send_image(filename):
     key = session.get('s_key', None)
     wordcollection = []
 
-    #------------new
     wordcollection = session.get('s_wordcollection', None)
-    print('HERE wordcollection: ', wordcollection)
     #use the first of the detected words, when there are more than one
     if(key != ''):
         if(len(wordcollection) > 0):
             key = wordcollection[0]
-    print('Revised key: ', key)
 
+    #print('Revised key: ', key)
     if(key == ''):
         location = 'images/' + category
     else:
@@ -428,9 +426,10 @@ def labelimagesview():
             print('FINISHED bulk saving')
 
         elif("audio" in request.form):
-            print('...labelling with keys')
+            print('\n...labelling with keys')
             key = form.label.data
             language = form.lang.data
+            print('searching for this term and language: ', key, language)
 
             try:
                 file = request.files['auth']
@@ -597,7 +596,7 @@ def prepareview():
             lzfile = 'tests.zip'
             path, dirs, files = next(os.walk(app.config['TESTS']))
             if(lzfile in files):
-                print('already downloaded the sample data..')
+                print('\nalready downloaded the sample data..')
                 pass
             else:
                 try:
@@ -618,12 +617,13 @@ def prepareview():
                 location = app.config['TMP']
                 nfiles = chunk_large_videofile(destination, chunksize, location)
                 chunkresult = 'result: ' + str(nfiles) + ' files of max ' + str(chunksize) + ' min...'
+                print('\nfinished chunking...')
             except:
                 print('Something went wrong...file less than 1 min long? No file chosen? Supported fromats are .webm and .mp4 only. Try again...')
                 return redirect(url_for('prepareview'))
 
         else:
-            print('SOMETHING ELSE')
+            print('Exception - please retry')
 
     return render_template(template, form=form, result=chunkresult)
 
@@ -713,7 +713,7 @@ def audioanotate():
             destination = os.path.join(app.config['STATIC'], cut_video)
             copyfile(source, destination)
             filename = cut_video
-            print('voiceover file now in anotate folder.')
+            print('voiceover file now in anotate folder.\n')
 
     return render_template(template, form=form, showvideo=filename)
 

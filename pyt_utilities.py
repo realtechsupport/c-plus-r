@@ -38,6 +38,11 @@ bali26_class_names = ['aroid', 'bamboo', 'banana', 'cacao', 'cinnamon', 'coffeea
 bali26_alexnet = 'https://filedn.com/lqzjnYhpY3yQ7BdfTulG1yY/models/bali26_alexnet.pth'
 bali26_resnet152 = 'https://filedn.com/lqzjnYhpY3yQ7BdfTulG1yY/models/bali26_resnet152.pth'
 bali26_rexnext50 = 'https://filedn.com/lqzjnYhpY3yQ7BdfTulG1yY/models/bali26_resnext50.pth'
+
+bali26_alexnet_notpretrained = 'https://filedn.com/lqzjnYhpY3yQ7BdfTulG1yY/models/bali26_alexnet_notpretrained.pth'
+bali26_resnet152_notpretrained = 'https://filedn.com/lqzjnYhpY3yQ7BdfTulG1yY/models/bali26_resnet152_notpretrained.pth'
+bali26_resnext50_notpretrained = 'https://filedn.com/lqzjnYhpY3yQ7BdfTulG1yY/models/bali26_resnext50_notpretrained.pth'
+
 bali26_samples_zip = 'https://filedn.com/lqzjnYhpY3yQ7BdfTulG1yY/bali26samples.zip'
 bali3_zip = 'https://filedn.com/lqzjnYhpY3yQ7BdfTulG1yY/bali-3.zip'
 bali3B_zip = 'https://filedn.com/lqzjnYhpY3yQ7BdfTulG1yY/bali-3B.zip'

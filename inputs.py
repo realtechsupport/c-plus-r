@@ -13,7 +13,6 @@ from flask_wtf import FlaskForm
 from wtforms_components import TimeField
 from wtforms.validators import NumberRange, Length
 
-
 class MakeClassifiers(FlaskForm):
     classifier = SelectField('classifier', choices =  [('alexnet', 'Alexnet'),('vanillanet', 'Vanillanet')], default=('vanillanet'), validators=[validators.InputRequired()])
     testcollection = SelectField('test collection', choices =  [('bali-3', 'bali-3'),('bali-3B', 'bali-3B'), ('bali-3D', 'bali-3D')], default=('bali-3'), validators=[validators.InputRequired()])
@@ -27,8 +26,10 @@ class MakeClassifiers(FlaskForm):
     pretrained = BooleanField('use pretrained network', default=True)
 
 class TestClassifiers(FlaskForm):
-    classifier = SelectField('classifier', choices =  [('bali26_resnet152.pth', 'Resnet152 (bali26)'),('bali26_resnext50.pth', 'Resnext50 (bali26)'),('bali26_alexnet.pth', 'Alexnet (bali26)')], default=('bali26_resnet152.pth'), validators=[validators.InputRequired()])
-    testcollection = SelectField('test collection', choices =  [('bali26samples', 'bali26'),('tba', 'tba')], default=('bali26samples'), validators=[validators.InputRequired()])
+    classifier = SelectField('classifier', choices =  [('bali26_resnet152', 'resnet152 (bali26)'), ('bali26_resnet152_np', 'resnet152_notpretrained (bali26)'), ('bali26_resnext50', 'resnext50 (bali26)'), \
+     ('bali26_resnext50_np', 'resnext50_notpretrained (bali26)'), ('bali26_alexnet', 'alexnet (bali26)'), ('bali26_alexnet_np', 'alexnet_notpretrained (bali26)')], \
+      default=('bali26_resnet152.pth'), validators=[validators.InputRequired()])
+    testcollection = SelectField('test collection', choices =  [('bali26samples', 'bali26')], default=('bali26samples'), validators=[validators.InputRequired()])
 
 class Checkimagesinputs(FlaskForm):
     ssim_min = IntegerField(label='min structural similarity % (0-99)', default=45, validators=[NumberRange(min=0, max=99), validators.InputRequired()])

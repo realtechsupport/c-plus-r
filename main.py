@@ -469,7 +469,7 @@ def testclassifiers():
 
     if (request.method == 'POST'):
         testcollection = form.testcollection.data
-        print('test collection is: ', testcollection)
+        print('\n\ntest collection is: ', testcollection)
         location = os.path.join(app.config['FIND'], testcollection)
         zfile = os.path.join(app.config['FIND'], testcollection) + '.zip'
         try:
@@ -493,32 +493,45 @@ def testclassifiers():
         if("display" in request.form):
             session['s_testcollection'] = testcollection
             #display = True; session['s_choices'] = ''
-
-        #elif("classify" in request.form):
         elif(("classify" in request.form) and (session.get('s_choices', None) != '' )):
             classifier = form.classifier.data
             session['s_testcollection'] = testcollection
 
             if(testcollection != 'bali26samples'):
-                print('here actions for other testcollections')
+                print('\nother collections not yet ready...\n\n')
+                return redirect(url_for('testclassifiers'))
+
 
             if(testcollection == 'bali26samples'):
                 class_names = bali26_class_names
 
-                if('Resnet152'.lower() in classifier):
+                if(classifier == 'bali26_resnet152'):
                     archive = bali26_resnet152
-                elif('Resnext50'.lower() in classifier):
-                    archive = bali26_rexnext50
-                elif('Alexnet'.lower() in classifier):
+                elif(classifier == 'bali26_resnet152_np'):
+                    archive = bali26_resnet152_notpretrained
+
+                elif(classifier == 'bali26_resnext50'):
+                    archive = bali26_resnext50
+                elif(classifier == 'bali26_resnext50_np'):
+                    archive = bali26_resnext50_notpretrained
+
+                elif(classifier == 'bali26_alexnet'):
                     archive = bali26_alexnet
+                elif(classifier == 'bali26_alexnet_np'):
+                    archive = bali26_alexnet_notpretrained
+
                 else:
                     archive = bali26_alexnet
 
+                classifier = classifier + '.pth'
+                print('selected classifier: ', classifier)
+
                 path, dirs, files = next(os.walk(app.config['MODELS']))
                 if(classifier in files):
+                    print('already have the matching classifier...\n')
                     pass
                 else:
-                    print('getting the matching trained classifier...')
+                    print('getting the matching classifier...\n')
                     modelname = archive.split('/')[-1]
                     wget.download(archive, (os.path.join(app.config['MODELS'], modelname)))
 
@@ -540,7 +553,7 @@ def testclassifiers():
                 moreresults = 'top three predictions: ' + str(tp_vals)
 
             except:
-                print('... display images before you classify and pick an image with left mouse click... ')
+                print('exception encountered ... click display images, pick an image (with left mouse button) before you classify ... ')
                 return redirect(url_for('testclassifiers'))
 
         elif("context" in request.form):

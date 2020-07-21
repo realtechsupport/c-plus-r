@@ -10,6 +10,7 @@
 from wtforms import *
 from wtforms.fields import *
 from flask_wtf import FlaskForm
+from flask_wtf.file import FileField, FileAllowed, FileRequired
 from wtforms_components import TimeField
 from wtforms.validators import NumberRange, Length
 
@@ -53,8 +54,11 @@ class GetTextinputs(FlaskForm):
     lang = SelectField('language spoken in video segment', choices =  [('en-US', 'English'),('fr', 'French'),('id-ID', 'Bahasa Indonesia')], default=('id-ID'), validators=[validators.InputRequired()])
 
 class AnotateInputs(FlaskForm):
-    vid = FileField(label='field video', default='HELLO WORLD')
+    vid = FileField(label='field video',  default='HELLO WORLD')
     mic = SelectField(label='microphone', choices =  [('0,0', 'default'),('AT2020', 'AT2020'),('USB Audio', 'USB Audio')], default=('default'), validators=[validators.InputRequired()])
+    #new - July 21 2020
+    mic_card = IntegerField(label='microphone card', default=0, validators=[NumberRange(min=0, max=9), validators.InputRequired()])
+    mic_device = IntegerField(label='microphone device', default=0, validators=[NumberRange(min=0, max=9), validators.InputRequired()])
     sa_m = IntegerField(label='start minute (0-59)', default=0, validators=[NumberRange(min=0, max=59), validators.InputRequired()])
     sa_s = IntegerField(label='start second (0-59)', default=0, validators=[NumberRange(min=0, max=59), validators.InputRequired()])
     ea_m = IntegerField(label='end minute (0-59)', default=0, validators=[NumberRange(min=0, max=59), validators.InputRequired()])

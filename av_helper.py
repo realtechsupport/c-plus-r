@@ -72,6 +72,12 @@ def seconds_to_hms(t):
     hms = '%s.%02d' % (time.strftime('%H:%M:%S', time.gmtime(s)), ms)
     return (hms)
 #-------------------------------------------------------------------------------
+def mic_device_info():
+    command = 'pacmd list-sources  | grep -e \'index:\'  -e \'alsa.card \' -e \'alsa.device \' -e \'device.product.name\' '
+    result = (subprocess.check_output(command, shell=True)).decode('utf-8')
+    return(result)
+
+#-------------------------------------------------------------------------------
 def mic_info(mic):
 
     print('this is the chosen mic:', mic)
@@ -251,9 +257,11 @@ def voiceover_recording(dur, card, device, output):
 
 #-------------------------------------------------------------------------------
 def record_and_playback(dur, card, device, output):
-    command1 = 'ffmpeg -loglevel panic -y -f alsa -ac 1 -i plughw:' + str(card) + ',' + str(device) + ' -t ' + str(dur) + ' ' +  output
+    #command1 = 'ffmpeg -loglevel panic -y -f alsa -ac 1 -i plughw:' + str(card) + ',' + str(device) + ' -t ' + str(dur) + ' ' +  output
+    command1 = 'ffmpeg -loglevel panic -y -f alsa -ac 1 -ar 48000 -i plughw:' + str(card) + ',' + str(device) + ' -t ' + str(dur) + ' ' +  output
     subprocess.call(command1, shell=True)
-    command2 = "aplay " + output
+    command2 = "aplay --rate=48000 " + output
+    #command2 = "aplay " + output
     subprocess.call(command2, shell=True)
 
 #-------------------------------------------------------------------------------

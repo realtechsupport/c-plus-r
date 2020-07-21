@@ -7,11 +7,7 @@ Catch & Release (C&R) is a collection of procedures that allow one to apply mach
 Furthermore, C&R can extract text from video. It can extract labels from video and use them as labels to generate
 image categories associated with the utterance.
 
-This software and the bali-26 dataset are the basis for the ‘Return to Bali’ project that explores machine learning to support the representation of ethnobotanical knowledge and practices in Central Bali.
-http://www.realtechsupport.org/new_works/return2bali.html 
-
-C&R can help  create machine learning datasets or can serve as a companion while studying convolutional neural network systems. If you would like to contribute toward building a rich dataset for machine learning training, contact the repository owner (marcbohlen@protonmail.com).
-
+This software and the bali-26 dataset are the basis for the ‘Return to Bali’ project that explores machine learning to support the representation of ethnobotanical knowledge and practices in Central Bali. http://www.realtechsupport.org/new_works/return2bali.html 
 
 <b>License</b>
 
@@ -35,7 +31,7 @@ Install Chromium on Ubuntu:
 
 Install the free Classic Cache Killer:
 
-	https://chrome.google.com/webstore/detail/classic-cache-killer/kkmknnnjliniefekpicbaaobdnjjikfp?hl=en 
+	https://chrome.google.com/webstore/detail/classic-cache-killer/kkmknnnjliniefekpicbaaobdnjjikfp?hl=en
 
 
 <b>Installation</b>
@@ -60,7 +56,7 @@ Activate the environment:
 	source ./env/bin/activate
 
 Cd to to the c-plus-r directory again.
-Install Requirements and Dependencies. 
+Install Requirements and Dependencies.
 This process may take 30 minutes or so.
 
 	pip3 install -r requirements.txt
@@ -76,7 +72,7 @@ Instructions to generate a key (https://cloud.google.com/text-to-speech/docs/qui
     2. From the Service account list, select New service account.
     3. In the Service account name field, enter a name.
     4. Don't select a value from the Role list. No role is required to access this service.
-    5. Click Create. 
+    5. Click Create.
     6. Click Create without role. A JSON file that contains your key downloads to your computer.
     7. Save the JSON file to the C+R project.
 
@@ -93,7 +89,7 @@ Start C+R (in the c-plus-r directory):
 
 	on ubuntu: 	python3 main.py ubuntu chromium no-debug
 	on mac: 	python3 main.py mac chrome no-debug
-	
+
 Specify all three items: OS, browser and debug mode. Supported OS: Ubuntu and Mac OS. Supported browsers on Ubuntu:
 Chromium and Firefox (less stable). To run in debug mode replace ’no-debug’ with ‘debug’.
 

@@ -640,7 +640,11 @@ def audioanotate():
     if (request.method == 'POST'):
         if("load" in request.form):
             print('in recording section')
-            mic = form.mic.data
+            #mic = form.mic.data
+            mic_d = form.mic_device.data
+            mic_c = form.mic_card.data
+            cardn = mic_c; devicen = mic_d
+
             try:
                 file = request.files['vid']
                 filename = secure_filename(file.filename).lower()
@@ -654,8 +658,9 @@ def audioanotate():
                 print('please select a video...')
                 return redirect(url_for('audioanotate'))
 
-            cardn, devicen = mic_info(mic)
-            print('mic info: ', cardn, devicen)
+            #cardn, devicen = mic_info(mic)
+            print('selected mic card and device: ', cardn, devicen)
+
             session['cardn'] = cardn
             session['devicen'] = devicen
             session['s_filename'] = filename
@@ -670,14 +675,26 @@ def audioanotate():
             except:
                 return redirect(url_for('audioanotate'))
 
+
+        elif("micinfo" in request.form):
+            result = mic_device_info()
+            print('\n\n Microphone hardware available: ', result)
+
+
         elif("check" in request.form):
-            print('recording 3 seconds of audio for system check... ')
-            mic = form.mic.data
-            cardn, devicen = mic_info(mic)
+            #mic = form.mic.data
+            mic_d = form.mic_device.data
+            mic_c = form.mic_card.data
+            cardn = mic_c; devicen = mic_d
+            print('selected mic card and device:', mic_c, mic_d)
+
+            #cardn, devicen = mic_info(mic)
             session['cardn'] = cardn
             session['devicen'] = devicen
+
             dur = 3;
             output = os.path.join(app.config['TMP'], 'audiocheck.wav')
+            print('recording 3 seconds of audio for system check... ')
             record_and_playback(dur, cardn, devicen, output)
             return redirect(url_for('audioanotate'))
 

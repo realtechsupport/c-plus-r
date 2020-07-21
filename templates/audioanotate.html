@@ -10,20 +10,36 @@
       <source src={{ url_for('static', filename=showvideo) }} type="video/webm">
       <source src={{ url_for('static', filename=showvideo) }} type="video/mp4">
   </video>
-
   <br>
+
   <center>
   <br><br>
-
-  <style> input  {width:150px; height: 25px;} </style>
+  <style> input  {width:125px; height: 22px;} </style>
   <form method="POST" enctype="multipart/form-data">
+  <!---
   <td>{{ form.vid.label }}</td>
   &nbsp&nbsp&nbsp
+   --------->
   <td>{{ form.vid }}</td>
+  &nbsp&nbsp&nbsp
+  <input type=submit name='context' value='Context' onclick='ShowContext(this)'>
+  <br><br>
+  <input type=submit name='micinfo' value='Get-Mic-Info'>
+
+  <br><br>
+  <!---
   &nbsp&nbsp&nbsp
   <td>{{ form.mic }}</td>
   &nbsp&nbsp&nbsp
   <td>{{ form.mic.label }}</td>
+ --------->
+  <td>{{ form.mic_card.label }}</td>
+  &nbsp&nbsp&nbsp
+  <td>{{ form.mic_card }}</td>
+  &nbsp&nbsp&nbsp
+  <td>{{ form.mic_device.label }}</td>
+  &nbsp&nbsp&nbsp
+  <td>{{ form.mic_device}}</td>
 
   <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 
@@ -32,17 +48,18 @@
   {
     alert(
       'Use this module to replace the field audio with a new audio file. '  +
-      'This can be helpful in the event an expert wishes to annotate a field video.' +
-      '\nAudio on linux can be tricky - see Readme for details and troubleshooting... ' +
+      'See Readme for details. ' +
+      '\n\n\'get-mic-info\' will generate a list of all the audio inputs on your computer. ' +
+      'Pick the card and device numbers of the microphone input you want to use. ' +
       '\n\n\'check-audio\' will record 3 seconds of audio on your selected mic input. ' +
-      'If you do not hear this sample, something is amiss with either your mic, mic selection or speakers. ' +
+      'If you do not hear the recording, something is amiss with either your mic, mic selection or speakers. ' +
       '\n\n\'remove-old-voiceover\' will delete old voice-over video and audio assets.' +
-      '\n\nPick your field video and select the microphone input (see Readme on how to add a microphone input).' +
+      '\n\nPick your field video and select the microphone inputs as above.' +
       '\nThen load the video and set start and end times.' +
       '\nThen segment the video.' +
-      '\nWhen that step is complete - it can take several minutes on .mp4 files - ensure the correct microphone is selected and turn off the speakers. ' +
+      '\nWhen that step is complete - it can take several minutes - ensure the correct microphone info is set and turn off the speakers. ' +
       '\n\nMove the cursor to the start of the segmented video (0:00).' +
-      '\nClick voiceover and comment on the video with appropriate keywords.' +
+      '\nClick voiceover and comment on the video with appropriate key terms.' +
       '\nWhen you finished the voiceover (no longer than the segmented video), go to \'label images\' or back to start.' +
       '\n\nThe annotated video will be in the \'anotate\' folder (with prefix \'voiceover\').'
       );
@@ -52,11 +69,9 @@
   <br><br>
   <input type=submit name='check' value='Check-Audio'>
   &nbsp&nbsp&nbsp
-  <input type=submit name='remove' value='Remove-Old-Voiceover'>
+  <input type=submit name='remove' value='Remove-Voiceover'>
   <br><br>
   <input type=submit name='load' value='Load-Video'>
-  &nbsp&nbsp&nbsp
-  <input type=submit name='context' value='Context' onclick='ShowContext(this)'>
   <br><br>
 
   <td>{{ form.sa_m.label }}</td>
@@ -87,6 +102,7 @@
   <a href="{{ url_for('labelimagesview') }}"> label images from video </a>
   &nbsp&nbsp&nbsp
   <a href="{{ url_for('index') }}"> back to start</a>
+
   </center>
 <!----------------------------------------------------------------------------->
 

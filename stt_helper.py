@@ -136,7 +136,8 @@ def transcribe_file_with_word_time_offsets(app, audiofile_1ch, videonamepath, ke
                         subprocess.call(command, shell=True)
 
             else:
-                print('result below confidence threshold... disregarding')
+                #print('result below confidence threshold... disregarding:', confidence)
+                print('result at confidence level ' + str(confidence) + ', below set threshold of ' + str(tconfidence) + '... disregarding result.')
 
         #rename_all(dir_t, offset=0)
 

@@ -169,7 +169,7 @@ def inputview():
                 authsource = os.path.join(app.config['STATIC'], auth_filename)
                 auth_file.save(authsource)
             except:
-                print('no credential file selected - cannot capture text without a valid [.json] credential ')
+                print('no credential file selected - cannot capture text without valid [.json] access.\n\n')
                 return redirect(url_for('inputview'))
 
             #now get the text from the set segment

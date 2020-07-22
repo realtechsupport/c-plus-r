@@ -69,6 +69,19 @@ input[type='time']
   font-size: 150%;
 }
 
+input2
+{
+    font-size: 85%;
+    color: black;
+    text-transform: lowercase;
+    text-align: center;
+    position: relative;
+    top: -4px;
+    width: 5px;
+}
+
+
+
 video
 {
    text-align: center;

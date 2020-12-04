@@ -1,10 +1,12 @@
 # c-plus-r
 
 
-<NOTE>
+<b> NOTE </b>
+
 Update December 2020.
 Do not use the zip download option - It seems to not include all files.
 Instead download with git clone from the command line: git clone https://github.com/realtechsupport/c-plus-r.git
+	
 	
 <b>Introduction</b>
 

@@ -1,5 +1,11 @@
 # c-plus-r
 
+
+<NOTE>
+Update December 2020.
+Do not use the zip download option - It seems to not include all files.
+Instead download with git clone from the command line: git clone https://github.com/realtechsupport/c-plus-r.git
+	
 <b>Introduction</b>
 
 Catch & Release (C&R) is a collection of procedures that allow one to apply machine learning classification onto field videos. C&R’s goal is to facilitate the creation of under-represented knowledge in machine learning in general, and experimental datasets for neural network image classification in particular. C&R allows anyone with a mobile phone and a laptop to create viable datasets for image classification (and to train state of the art convolutional neural networks with these datasets).

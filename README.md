@@ -1,7 +1,7 @@
 # c-plus-r
 
 
-<b> Updates December 2020 </b>
+<b> <i> Updates December 2020 </b> </i>
 
 -Do not use the zip download option - It seems to not include all files.
 Instead download with git clone from the command line: git clone https://github.com/realtechsupport/c-plus-r.git

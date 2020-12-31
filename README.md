@@ -6,7 +6,9 @@
 - Do not use the zip download option - It seems to not include all files.
 Instead download with git clone from the command line: git clone https://github.com/realtechsupport/c-plus-r.git
 
-- Disable Chrome's hardware accelleration (settings/advanced/system) if you are on Ubuntu 20.04LTS and using that browser
+- Tested on Ubuntu 20.04 LTS (kernel 5.2.8). Disable Chromium's hardware accelleration (settings/advanced/system) if you are on Ubuntu 20.04 LTS with Chromium.
+
+
 <br>	
 	
 	
@@ -30,7 +32,7 @@ Cite this project as: Catch&Release version1
 C&R runs on Linux and macOS under Python3 and Flask with Chromium or Firefox.
 
 C&R uses the PyTorch framework to train and test image classifiers and connects to the Google Speech API (free) for speech processing. Library versions and dependencies are given in the requirements file.
-C&R has been tested on a desktop (i7-4770 CPU with 16GB of memory) and a laptop (i7-3667 CPU with 8GB of memory) under Ubuntu (18.04 TLS under kernels 5.2.8 and 5.3.0 ) and under macOS (Catalina) with images sourced from .mp4 and .webm video (HD [1920 x 1080] at 30f/s; .mp4 H.264 encoded) from multiple (android
+C&R has been tested on a desktop (i7-4770 CPU with 16GB of memory) and a laptop (i7-3667 CPU with 8GB of memory) under Ubuntu (18.04 and 20.04 TLS under kernels 5.2.8 and 5.3.0 ) and under macOS (Catalina) with images sourced from .mp4 and .webm video (HD [1920 x 1080] at 30f/s; .mp4 H.264 encoded) from multiple (android
 OS) mobile phones and GoPro Hero 6 action cameras.
 
 Recommended browser: Chromium on Ubuntu, Chrome on MAC.

@@ -3,11 +3,11 @@
 
 <b> <i> Updates December 2020 </b> </i>
 
--Do not use the zip download option - It seems to not include all files.
+- Do not use the zip download option - It seems to not include all files.
 Instead download with git clone from the command line: git clone https://github.com/realtechsupport/c-plus-r.git
 
--If you intend to use this program with Chrome on Ubuntu 20.04 LTS, disable Chrome's hardware accelleration (settings/advanced/system)
-	
+- Disable Chrome's hardware accelleration (settings/advanced/system) if you are on Ubuntu 20.04LTS and using that browser
+<br>	
 	
 	
 <b>Introduction</b>

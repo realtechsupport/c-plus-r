@@ -1,4 +1,4 @@
-aiohttp==3.6.2
+aiohttp==3.7.4
 async-timeout==3.0.1
 BareNecessities==0.2.8
 cachetools==4.0.0

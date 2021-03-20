@@ -19,7 +19,12 @@ Catch & Release (C&R) is a collection of procedures that allow one to apply mach
 Furthermore, C&R can extract text from video. It can extract labels from video and use them as labels to generate
 image categories associated with the utterance.
 
-This software and the bali-26 dataset are the basis for the ‘Return to Bali’ project that explores machine learning to support the representation of ethnobotanical knowledge and practices in Central Bali. http://www.realtechsupport.org/new_works/return2bali.html 
+This software and the bali-26 dataset are the basis for the ‘Return to Bali’ project that explores machine
+learning to support the representation of ethnobotanical knowledge and practices in Central Bali.
+
+Project website: http://www.realtechsupport.org/new_works/return2bali.html
+Github repository: https://github.com/realtechsupport/return-to-bali 
+
 
 <b>License</b>
 

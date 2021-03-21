@@ -1,6 +1,9 @@
 # c-plus-r
 
 
+![alt text](https://github.com/realtechsupport/video-enhanced-classification/blob/main/label_with_voice.png?raw=true)
+
+
 <b> <i> Updates December 2020 </b> </i>
 
 - Do not use the zip download option - It seems to not include all files.

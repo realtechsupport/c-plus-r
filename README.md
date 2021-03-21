@@ -1,13 +1,15 @@
 # c-plus-r
 
 
-![alt text](https://github.com/realtechsupport/c-plus-r/label_with_voice.png?raw=true)
+![alt text](https://github.com/realtechsupport/c-plus-r/blob/master/label_with_voice.png?raw=true)
 
 
 <b> <i> Updates December 2020 </b> </i>
 
 - Do not use the zip download option - It seems to not include all files.
-Instead download with git clone from the command line: git clone https://github.com/realtechsupport/c-plus-r.git
+Instead download with git clone from the command line: 
+
+	git clone https://github.com/realtechsupport/c-plus-r.git
 
 - Tested on Ubuntu 20.04 LTS (kernel 5.2.8). Disable Chromium's hardware accelleration (settings/advanced/system) if you are on Ubuntu 20.04 LTS with Chromium.
 

@@ -1,7 +1,7 @@
 # c-plus-r
 
 
-![alt text](https://github.com/realtechsupport/video-enhanced-classification/blob/main/label_with_voice.png?raw=true)
+![alt text](https://github.com/realtechsupport/c-plus-r/label_with_voice.png?raw=true)
 
 
 <b> <i> Updates December 2020 </b> </i>

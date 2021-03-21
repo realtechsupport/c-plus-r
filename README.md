@@ -12,7 +12,7 @@ Instead download with git clone from the command line: git clone https://github.
 - Tested on Ubuntu 20.04 LTS (kernel 5.2.8). Disable Chromium's hardware accelleration (settings/advanced/system) if you are on Ubuntu 20.04 LTS with Chromium.
 
 
-<br>	
+<br><br>	
 	
 	
 <b>Introduction</b>

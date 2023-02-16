@@ -69,7 +69,7 @@ typing-extensions==3.7.4.1
 uritemplate==3.0.1
 urllib3>=1.25.8
 validators==0.14.1
-Werkzeug==2.0.0
+Werkzeug==2.2.3
 wget==3.2
 WTForms==2.2.1
 WTForms-Components==0.10.4

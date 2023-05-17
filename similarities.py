@@ -3,12 +3,15 @@
 # routines to check image similarities / qualities
 # with 2 methods, MSE and SSIM
 # https://scikit-image.org/docs/dev/auto_examples/transform/plot_ssim.html
+# scikit 0.20.0
+# https://scikit-image.org/docs/stable/auto_examples/transform/plot_ssim.html
 #-------------------------------------------------------------------------------
 
 from utilities import *
 from skimage import measure
 #from skiimage 0.18 on...compare_ssim is in metrics.structual_similarity
 from skimage import metrics
+from skimage.metrics import structural_similarity as ssim
 from PIL import Image, ImageStat
 #-------------------------------------------------------------------------------
 
@@ -45,9 +48,11 @@ def get_ssim(imagename1, imagename2):
 		img2 = np.array(img2)
 		img1 = img1[:, :, ::-1].copy()
 		img2 = img2[:, :, ::-1].copy()
+		
 		# compute structural similarity
 		# returns values between 0 and 1; smaller values = more similar
-		s = measure.compare_ssim(img1, img2, multichannel=True)
+		# might have to add data range ..ssim = ssim(img, img, data_range=img.max() - img.min())
+		s = ssim(img1, img2)
 		#s = metrics.structual_similarity.compare_ssim(img1, img2, multichannel=True)
 		s = float("{0:.6f}".format(s))
 	except:

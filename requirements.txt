@@ -24,7 +24,7 @@ googleapis-common-protos==1.6.0
 greenlet>=0.4.15
 grpcio>=1.53.0
 gunicorn>=20.0.0
-httplib2==0.19.0
+httplib2>=0.32.0
 idna>=3.7
 imageio>=2.27
 infinity==1.4
